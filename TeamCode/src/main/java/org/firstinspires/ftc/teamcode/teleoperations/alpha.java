@@ -81,15 +81,15 @@ public class alpha extends OpMode {
             double sin = Math.sin(theta - Math.PI / 4);
             double cos = Math.cos(theta - Math.PI / 4);
             double max = Math.max(Math.abs(sin), Math.abs(cos));
-            RF.setPower(power * cos / max + turn);
+            RF.setPower(power * cos / max - turn);
             LF.setPower(power * sin / max - turn);
             RB.setPower(power * sin / max + turn);
-            LB.setPower(power * cos / max - turn);
+            LB.setPower(power * cos / max + turn);
             if ((power + Math.abs(turn)) > 1) {
                 LF.setPower((LF.getPower()) / (power + turn));
-                RF.setPower((RF.getPower()) / -(power + turn));
+                RF.setPower((RF.getPower()) / (power + turn));
                 RB.setPower((RB.getPower()) / (power + turn));
-                LB.setPower((LB.getPower()) / -(power + turn));
+                LB.setPower((LB.getPower()) / (power + turn));
             }
         }
 
