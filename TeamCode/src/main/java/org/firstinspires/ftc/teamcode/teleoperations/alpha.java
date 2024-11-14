@@ -87,9 +87,9 @@ public class alpha extends OpMode {
             LB.setPower(power * cos / max - turn);
             if ((power + Math.abs(turn)) > 1) {
                 LF.setPower((LF.getPower()) / (power + turn));
-                RF.setPower((RF.getPower()) / (power + turn));
+                RF.setPower((RF.getPower()) / -(power + turn));
                 RB.setPower((RB.getPower()) / (power + turn));
-                LB.setPower((LB.getPower()) / (power + turn));
+                LB.setPower((LB.getPower()) / -(power + turn));
             }
         }
 
