@@ -108,14 +108,14 @@ public class alpha extends OpMode {
         upDownSlides.setPower(gamepad2.left_stick_y * -1.1);
 
         // align grabber when x button tapped
-        if (gamepad2.x) {
+        if (gamepad2.square) {
             grabberSpin.setPosition(1);
             grabber.setPosition(0);
             grabberCorrection.setPosition(0);
         }
 
         // pick up specimen when a button tapped
-        if (gamepad2.a) {
+        if (gamepad2.x) {
             grabber.setPosition(0.4);
             grabberSpin.setPosition(0.98);
             placer.setPosition(1);
