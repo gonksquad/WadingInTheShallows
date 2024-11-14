@@ -128,13 +128,13 @@ public class alpha extends OpMode {
             placerSpin.setPosition(0.5);
             grabberSpin.setPosition(1);
             grabberCorrection.setPosition(0.6);
-            placerSpin.setPosition(1);
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             ;
+            placerSpin.setPosition(1);
             placer.setPosition(1);
             try {
                 sleep(500);
