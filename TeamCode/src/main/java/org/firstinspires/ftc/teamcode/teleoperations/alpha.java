@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 @TeleOp(name = "ALPHA", group = "Ronan Presents:")
 public class alpha extends OpMode {
@@ -22,6 +23,7 @@ public class alpha extends OpMode {
     public Servo grabberCorrection;
     public Servo grabberSpin;
     public double speed = 1;
+    public Gamepad.RumbleEffect customRumbleEffect;
 
     @Override
     public void init() {
@@ -40,6 +42,14 @@ public class alpha extends OpMode {
         placerSpin = hardwareMap.get(Servo.class, "ES2");
         grabberCorrection = hardwareMap.get(Servo.class, "ES3");
         grabberSpin = hardwareMap.get(Servo.class, "ES4");
+
+        customRumbleEffect = new Gamepad.RumbleEffect.Builder()
+                .addStep(0.0, 1.0, 500) // Rumble right motor 100% for 500 mSec
+                .addStep(0.0, 0.0, 300) // Pause for 300 mSec
+                .addStep(1.0, 0.0, 250) // Rumble left motor 100% for 250 mSec
+                .addStep(0.0, 0.0, 250) // Pause for 250 mSec
+                .addStep(1.0, 0.0, 250) // Rumble left motor 100% for 250 mSec
+                .build();
 
         telemetry.addData("Status", "Initialized");
     }
@@ -92,7 +102,7 @@ public class alpha extends OpMode {
         inOutSlides.setPower(-gamepad2.right_trigger);
 
         // vertical extension driven by left stick y
-        upDownSlides.setPower(gamepad2.left_stick_y * 1.1);
+        upDownSlides.setPower(gamepad2.left_stick_y * -1.1);
 
         // align grabber when x button tapped
         if (gamepad2.x) {
@@ -110,6 +120,9 @@ public class alpha extends OpMode {
             placer.setPosition(0);
         }
 
+        if (gamepad1.a) {
+            gamepad1.runRumbleEffect(customRumbleEffect);
+        }
     }
 
     @Override
