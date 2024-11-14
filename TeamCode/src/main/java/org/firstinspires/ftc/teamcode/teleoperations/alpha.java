@@ -120,7 +120,7 @@ public class alpha extends OpMode {
             placer.setPosition(0);
         }
 
-        if (gamepad1.a) {
+        if (gamepad1.x) {
             gamepad1.runRumbleEffect(customRumbleEffect);
         }
     }
