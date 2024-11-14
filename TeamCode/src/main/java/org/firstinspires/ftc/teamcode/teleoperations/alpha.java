@@ -125,7 +125,7 @@ public class alpha extends OpMode {
         // pick up specimen when a button tapped
         if (gamepad2.cross) {
             placer.setPosition(0);
-            grabberSpin.setPosition(0.9);
+            grabberSpin.setPosition(1);
             grabberCorrection.setPosition(0.6);
             try {
                 sleep(1000);
@@ -134,6 +134,12 @@ public class alpha extends OpMode {
             }
             ;
             placer.setPosition(1);
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ;
             grabber.setPosition(1);
         }
 
