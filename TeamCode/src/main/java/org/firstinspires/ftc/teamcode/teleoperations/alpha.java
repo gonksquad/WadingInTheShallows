@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleoperations;
 
+import static java.lang.Thread.sleep;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -110,8 +112,14 @@ public class alpha extends OpMode {
         // align grabber when x button tapped
         if (gamepad2.square) {
             grabberSpin.setPosition(0);
-            grabber.setPosition(0.5);
             grabberCorrection.setPosition(1);
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ;
+            grabber.setPosition(0.5);
         }
 
         // pick up specimen when a button tapped
