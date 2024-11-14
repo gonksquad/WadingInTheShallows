@@ -120,9 +120,15 @@ public class alpha extends OpMode {
             placer.setPosition(0);
         }
 
+        // fun
         if (gamepad1.x) {
             gamepad1.runRumbleEffect(customRumbleEffect);
+            gamepad1.setLedColor(0, 255, 0, 1000);
         }
+        if (gamepad1.circle) {
+            gamepad1.rumble(1.0, 1.0, 1000);
+        }
+        telemetry.addData(">", "Are we RUMBLING? %s\n", gamepad1.isRumbling() ? "YES" : "no");
     }
 
     @Override
