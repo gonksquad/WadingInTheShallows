@@ -101,21 +101,15 @@ public class TeleopScrimmage extends LinearOpMode {
             //placer =            0 ==  open
             //placerSpin =        1 ==  Drop position
 
-
-
-
-
-
-
             if (gamepad1.a) {
                 grabber.setPosition(0.8);
-                grabberSpin.setPosition(0);//TODO: test for if 0 or 1, should be facing down
+                grabberSpin.setPosition(0);
             }
 
             if (gamepad1.b) {
-                grabber.setPosition(0.4);//TODO: test to see if 0 or 1, should be closed
+                grabber.setPosition(0.4);
                 sleep(300);
-                grabberSpin.setPosition(0.98);//TODO: opposite than a
+                grabberSpin.setPosition(0.98);
                 placer.setPosition(1);
                 placerSpin.setPosition(0.3);
                 sleep(1000);
@@ -123,14 +117,21 @@ public class TeleopScrimmage extends LinearOpMode {
             }
 
             if (gamepad1.x) {
-                placerSpin.setPosition(0.3);//TODO: test to see if 0 or 1, should position to grab from grabber
+                placerSpin.setPosition(0.3);
                 sleep(1000);
-                placer.setPosition(1);//TODO: test to see if 0 or 1, should grab from grabber
+                placer.setPosition(1);
                 sleep(1000);
-                grabber.setPosition(1);//TODO: opposite of b, should open
+                grabber.setPosition(1);
                 sleep(1000);
-                placerSpin.setPosition(1);//TODO: test to see if goes to place
+                placerSpin.setPosition(1);
             }
+
+
+
+
+
+
+
 
             if (gamepad1.y) {
                 placerSpin.setPosition(1);
