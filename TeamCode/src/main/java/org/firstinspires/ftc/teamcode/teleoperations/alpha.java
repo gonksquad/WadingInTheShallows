@@ -110,14 +110,14 @@ public class alpha extends OpMode {
         // align grabber when x button tapped
         if (gamepad2.square) {
             grabberSpin.setPosition(0.5);
-            grabber.setPosition(0);
+            grabber.setPosition(0.5);
             grabberCorrection.setPosition(1);
         }
 
         // pick up specimen when a button tapped
         if (gamepad2.cross) {
             grabberSpin.setPosition(1);
-            grabber.setPosition(0.5);
+            grabber.setPosition(1);
             grabberCorrection.setPosition(0);
         }
 
