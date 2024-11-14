@@ -117,7 +117,7 @@ public class alpha extends OpMode {
         // pick up specimen when a button tapped
         if (gamepad2.cross) {
             grabberSpin.setPosition(1);
-            grabber.setPosition(1);
+            grabber.setPosition(0.5);
             grabberCorrection.setPosition(0);
         }
 
