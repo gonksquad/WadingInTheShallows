@@ -34,6 +34,9 @@ public class alpha extends OpMode {
         RB = hardwareMap.get(DcMotor.class, "1");
         RF = hardwareMap.get(DcMotor.class, "3");
 
+        LF.setDirection(DcMotor.Direction.REVERSE);
+        LB.setDirection(DcMotor.Direction.REVERSE);
+
         upDownSlides = hardwareMap.get(DcMotor.class, "E0");
         inOutSlides = hardwareMap.get(DcMotor.class, "E1");
 
@@ -126,7 +129,7 @@ public class alpha extends OpMode {
             gamepad1.setLedColor(0, 255, 0, 1000);
         }
         if (gamepad1.circle) {
-            gamepad1.rumble(1.0, 1.0, 1000);
+            gamepad1.rumble(1.0, 1.0, 200);
         }
         telemetry.addData(">", "Are we RUMBLING? %s\n", gamepad1.isRumbling() ? "YES" : "no");
     }
