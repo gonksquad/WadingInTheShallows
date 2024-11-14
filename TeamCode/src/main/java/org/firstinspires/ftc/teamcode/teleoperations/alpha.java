@@ -118,7 +118,7 @@ public class alpha extends OpMode {
         if (gamepad2.cross) {
             grabberSpin.setPosition(1);
             grabber.setPosition(1);
-            grabberCorrection.setPosition(1);
+            grabberCorrection.setPosition(0);
         }
 
         // fun
