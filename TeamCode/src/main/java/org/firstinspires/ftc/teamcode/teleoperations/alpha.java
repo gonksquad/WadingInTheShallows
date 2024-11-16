@@ -112,7 +112,7 @@ public class alpha extends OpMode {
         // align grabber when x button tapped
         if (gamepad2.square) {
             grabberSpin.setPosition(0);
-            grabberCorrection.setPosition(1);
+            grabberCorrection.setPosition(0.5);
             try {
                 sleep(1000);
             } catch (InterruptedException e) {

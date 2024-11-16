@@ -128,11 +128,6 @@ public class TeleopScrimmage extends LinearOpMode {
 
 
 
-
-
-
-
-
             if (gamepad1.y) {
                 placerSpin.setPosition(1);
             }
