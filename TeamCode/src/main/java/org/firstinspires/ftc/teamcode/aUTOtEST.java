@@ -52,7 +52,7 @@ public class aUTOtEST extends OpMode {
     }
     @Override
     public void loop() {
-        PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(18, 64, Math.toRadians(90)));
+        PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(-18, -64, Math.toRadians(270)));
 
         Pose2d pose1 = new Pose2d(10, 34, Math.toRadians(270));
         Pose2d pose2 = new Pose2d(52, 43, Math.toRadians(180));
@@ -65,7 +65,15 @@ public class aUTOtEST extends OpMode {
 
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(10,34), Math.toRadians(270))
+                .splineTo(new Vector2d(-10,-34), Math.toRadians(90))
+                .strafeToSplineHeading(new Vector2d(-40,-40), Math.toRadians(110))
+                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
+                .strafeToSplineHeading(new Vector2d(-50,-40), Math.toRadians(110))
+                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
+                .strafeToSplineHeading(new Vector2d(-58,-40), Math.toRadians(130))
+                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
+                .strafeTo(new Vector2d(-49, -49))
+                .splineTo(new Vector2d(-24,-12), Math.toRadians(0))
                 .build();
 
         l2 = drive.actionBuilder(pose1)
@@ -119,8 +127,8 @@ public class aUTOtEST extends OpMode {
         Actions.runBlocking(
                 l1
         );
-        Actions.runBlocking(
-                l2
-        );
+//        Actions.runBlocking(
+//                l2
+//        );
         }
     }
