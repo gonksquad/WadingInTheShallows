@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.teleoperations;
 
 import static java.lang.Thread.sleep;
 
@@ -29,12 +29,10 @@ public class TeleopScrimmage extends OpMode {
     public Gamepad.RumbleEffect customRumbleEffect;
     public int setServo = 1;
 
-
-    //TODO: TEST to see if chatgpt did a good job or not
+    // TODO: TEST to see if chatgpt did a good job or not
     private static final int MAX_POSITION = 1000; // Example max encoder value
     private static final int MIN_POSITION = 0; // Minimum encoder value
     private int targetPosition = 0; // Target position for the motor
-
 
     @Override
     public void init() {
@@ -65,8 +63,7 @@ public class TeleopScrimmage extends OpMode {
                 .addStep(1.0, 0.0, 250) // Rumble left motor 100% for 250 mSec
                 .build();
 
-
-        //TODO: TEST to see if chatgpt did a good job or not
+        // TODO: TEST to see if chatgpt did a good job or not
         inOutSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         inOutSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -82,11 +79,11 @@ public class TeleopScrimmage extends OpMode {
         timer.reset();
     }
 
-    //grabber =           1   ==  open
-    //grabberCorrection = 0.5 ==  vertical orientation grab
-    //grabberSpin =       1   ==  Passoff position
-    //placer =            0   ==  open
-    //placerSpin =        1   ==  Drop position
+    // grabber = 1 == open
+    // grabberCorrection = 0.5 == vertical orientation grab
+    // grabberSpin = 1 == Passoff position
+    // placer = 0 == open
+    // placerSpin = 1 == Drop position
 
     @Override
     public void loop() {
@@ -114,7 +111,7 @@ public class TeleopScrimmage extends OpMode {
                 LB.setPower((LB.getPower()) / (power + turn));
             }
         }
-        if(setServo == 1){
+        if (setServo == 1) {
             grabber.setPosition(0.54);
             grabberSpin.setPosition(1);
             grabberCorrection.setPosition(0.6);
@@ -128,14 +125,13 @@ public class TeleopScrimmage extends OpMode {
         // placer = 0 == open
         // placerSpin = 1 == Drop position
 
-//        // horizontal retraction driven by left trigger
-//        inOutSlides.setPower(gamepad2.left_trigger);
-//        // horizontal extension driven by right trigger
-//        inOutSlides.setPower(-gamepad2.right_trigger);
+        // // horizontal retraction driven by left trigger
+        // inOutSlides.setPower(gamepad2.left_trigger);
+        // // horizontal extension driven by right trigger
+        // inOutSlides.setPower(-gamepad2.right_trigger);
 
-
-        //TODO: TEST to see if chatgpt did a good job or not
-        //Check if the right trigger is pressed
+        // TODO: TEST to see if chatgpt did a good job or not
+        // Check if the right trigger is pressed
         if (gamepad1.right_trigger > 0.1) {
             // Increase the target position, but don't exceed the max limit
             targetPosition = Math.min(targetPosition + 10, MAX_POSITION);
@@ -153,29 +149,28 @@ public class TeleopScrimmage extends OpMode {
         inOutSlides.setTargetPosition(targetPosition);
         inOutSlides.setPower(1.0); // Full power to reach the target
 
-
-        if(gamepad2.dpad_down){
+        if (gamepad2.dpad_down) {
             grabberSpin.setPosition(0);
             grabber.setPosition(1);
         }
-        if(gamepad2.dpad_up){
+        if (gamepad2.dpad_up) {
             grabberSpin.setPosition(1);
             grabber.setPosition(0.56);
         }
 
-        //lift logic
-        if(gamepad2.left_stick_y>0.1){
+        // lift logic
+        if (gamepad2.left_stick_y > 0.1) {
             // vertical extension driven by left stick y
             upDownSlides.setPower(gamepad2.left_stick_y * -1.1);
-        }else if(gamepad2.left_stick_y<0.1){
+        } else if (gamepad2.left_stick_y < 0.1) {
             upDownSlides.setPower(gamepad2.left_stick_y * -1.1);
-        }else{
+        } else {
             upDownSlides.setPower(0.1);
         }
 
         // placer grabs sample off wall
-        if(gamepad2.dpad_right){
-            placerSpin.setPosition(1);//TODO: NEW SERVO FIX
+        if (gamepad2.dpad_right) {
+            placerSpin.setPosition(1);// TODO: NEW SERVO FIX
         }
         if (gamepad2.square) {
             placer.setPosition(1);
@@ -184,40 +179,40 @@ public class TeleopScrimmage extends OpMode {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            placerSpin.setPosition(0.7);//TODO: NEW SERVO FIX
+            placerSpin.setPosition(0.7);// TODO: NEW SERVO FIX
         }
 
         // pick up specimen when a button tapped AND TRADEOFF
-//        if (gamepad2.cross) {
-//            grabber.setPosition(0.54);
-//            placer.setPosition(0.5);
-//            placerSpin.setPosition(0.2);//TODO: NEW SERVO FIX
-//            try {
-//                sleep(200);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            grabberSpin.setPosition(1);
-//            grabberCorrection.setPosition(0.6);
-//            try {
-//                sleep(3000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            placer.setPosition(1);
-//            try {
-//                sleep(400);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            grabber.setPosition(1);
-//            try {
-//                sleep(300);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            placerSpin.setPosition(1);//TODO: NEW SERVO FIX
-//        }
+        // if (gamepad2.cross) {
+        // grabber.setPosition(0.54);
+        // placer.setPosition(0.5);
+        // placerSpin.setPosition(0.2);//TODO: NEW SERVO FIX
+        // try {
+        // sleep(200);
+        // } catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
+        // grabberSpin.setPosition(1);
+        // grabberCorrection.setPosition(0.6);
+        // try {
+        // sleep(3000);
+        // } catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
+        // placer.setPosition(1);
+        // try {
+        // sleep(400);
+        // } catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
+        // grabber.setPosition(1);
+        // try {
+        // sleep(300);
+        // } catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
+        // placerSpin.setPosition(1);//TODO: NEW SERVO FIX
+        // }
         if (gamepad2.cross) {
             // Run the sequence only once when button is pressed
             if (step == 0) {
@@ -253,11 +248,10 @@ public class TeleopScrimmage extends OpMode {
             }
         }
 
-        //open placer
-        if(gamepad2.y){
+        // open placer
+        if (gamepad2.y) {
             placer.setPosition(0.5);
         }
-
 
         // fun
         if (gamepad1.x) {
