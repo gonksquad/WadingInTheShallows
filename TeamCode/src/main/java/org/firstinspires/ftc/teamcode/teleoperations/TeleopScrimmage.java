@@ -5,6 +5,7 @@ import static java.lang.Thread.sleep;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -28,11 +29,6 @@ public class TeleopScrimmage extends OpMode {
     public double speed = 1;
     public Gamepad.RumbleEffect customRumbleEffect;
     public int setServo = 1;
-
-
-    //TODO: TEST to see if chatgpt did a good job or not
-    private static final int MAX_POSITION = 1000; // Example max encoder value
-    private static final int MIN_POSITION = 0; // Minimum encoder value
     private int targetPosition = 0; // Target position for the motor
 
 
@@ -69,6 +65,7 @@ public class TeleopScrimmage extends OpMode {
         //TODO: TEST to see if chatgpt did a good job or not
         inOutSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         inOutSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);//or RUN_TO_POSITION
+        inOutSlides.setDirection(DcMotor.Direction.REVERSE);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -136,23 +133,23 @@ public class TeleopScrimmage extends OpMode {
 
         //TODO: TEST to see if chatgpt did a good job or not
         //Check if the right trigger is pressed
-        if (gamepad1.right_trigger > 0.1) {
-            // Increase the target position, but don't exceed the max limit
-            targetPosition = Math.min(targetPosition + 10, MAX_POSITION);
+        if (gamepad2.right_trigger > 0.1) {
+            targetPosition = 1000;
+            inOutSlides.setTargetPosition(targetPosition);
+            inOutSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            inOutSlides.setPower(0.5);
         }
 
         // Check if the left trigger is pressed
-        if (gamepad1.left_trigger > 0.1) {
-            // Decrease the target position, but don't go below the min limit
-            targetPosition = Math.max(targetPosition - 10, MIN_POSITION);
+        if (gamepad2.left_trigger > 0.1) {
+            targetPosition = 100;
+            inOutSlides.setTargetPosition(targetPosition);
+            inOutSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            inOutSlides.setPower(0.5);
         }
 
         telemetry.addData("inOutSlides position", inOutSlides.getCurrentPosition());
-
-        // Set the motor's target position
-//        inOutSlides.setTargetPosition(targetPosition);
-//        inOutSlides.setPower(1.0); // Full power to reach the target
-
+        telemetry.addData("TargetPose : ", targetPosition);
 
         if(gamepad2.dpad_down){
             grabberSpin.setPosition(0);
@@ -226,19 +223,19 @@ public class TeleopScrimmage extends OpMode {
         if (step == 1) {
             grabber.setPosition(0.54);
             placer.setPosition(0.5);
-            placerSpin.setPosition(0.2);
+            placerSpin.setPosition(0.175);
             timer.reset(); // Start timing for the next step
             step++;
         }
 
-        if (step == 2 && timer.milliseconds() >= 200) {
+        if (step == 2 && timer.milliseconds() >= 400) {
             grabberSpin.setPosition(1);
             grabberCorrection.setPosition(0.6);
             timer.reset();
             step++;
         }
 
-        if (step == 3 && timer.milliseconds() >= 3000) {
+        if (step == 3 && timer.milliseconds() >= 1000) {
             placer.setPosition(1);
             timer.reset();
             step++;
@@ -251,7 +248,7 @@ public class TeleopScrimmage extends OpMode {
         }
 
         if (step == 5 && timer.milliseconds() >= 300) {
-            placerSpin.setPosition(1);
+            placerSpin.setPosition(0.8);
             step = 0; // Reset step counter to allow re-triggering of sequence
         }
         //open placer
