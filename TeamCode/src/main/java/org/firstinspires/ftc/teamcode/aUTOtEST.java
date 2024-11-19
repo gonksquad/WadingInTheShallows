@@ -8,6 +8,8 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -31,6 +33,17 @@ import java.util.Objects;
 
 @Autonomous
 public class aUTOtEST extends OpMode {
+    public DcMotor LF;
+    public DcMotor LB;
+    public DcMotor RB;
+    public DcMotor RF;
+    public DcMotor upDownSlides;
+    public DcMotor inOutSlides;
+    public Servo grabber;
+    public Servo placer;
+    public Servo placerSpin;
+    public Servo grabberCorrection;
+    public Servo grabberSpin;
 
     String position = "none";
     String startposition = "none";
@@ -46,12 +59,37 @@ public class aUTOtEST extends OpMode {
     Action r2;
     Action r3;
 
+    private void upDownGoTO(int position,double power){
+        upDownSlides.setTargetPosition(position);
+        upDownSlides.setPower(power);
+    }
+
     @Override
     public void init() {
 
     }
     @Override
     public void loop() {
+        LF = hardwareMap.get(DcMotor.class, "2");
+        LB = hardwareMap.get(DcMotor.class, "0");
+        RB = hardwareMap.get(DcMotor.class, "1");
+        RF = hardwareMap.get(DcMotor.class, "3");
+
+        RB.setDirection(DcMotor.Direction.REVERSE);
+        LB.setDirection(DcMotor.Direction.REVERSE);
+
+        upDownSlides = hardwareMap.get(DcMotor.class, "E0");
+        inOutSlides = hardwareMap.get(DcMotor.class, "E1");
+
+        grabber = hardwareMap.get(Servo.class, "ES0");
+        placer = hardwareMap.get(Servo.class, "ES1");
+        placerSpin = hardwareMap.get(Servo.class, "ES2");
+        grabberCorrection = hardwareMap.get(Servo.class, "ES3");
+        grabberSpin = hardwareMap.get(Servo.class, "ES4");
+
+        upDownSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        upDownSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(-18, -64, Math.toRadians(270)));
 
         Pose2d pose1 = new Pose2d(10, 34, Math.toRadians(270));
@@ -66,25 +104,12 @@ public class aUTOtEST extends OpMode {
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
                 .splineTo(new Vector2d(-10,-34), Math.toRadians(90))
-                .strafeToSplineHeading(new Vector2d(-40,-40), Math.toRadians(110))
-                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
-                .strafeToSplineHeading(new Vector2d(-50,-40), Math.toRadians(110))
-                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
-                .strafeToSplineHeading(new Vector2d(-58,-40), Math.toRadians(130))
-                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
-                .strafeTo(new Vector2d(-49, -49))
-                .splineTo(new Vector2d(-24,-12), Math.toRadians(0))
                 .build();
 
         l2 = drive.actionBuilder(pose1)
-                .setReversed(false)
-                .splineTo(new Vector2d(40,40), Math.toRadians(310))
-                .splineTo(new Vector2d(55,55), Math.toRadians(225))
-                .splineTo(new Vector2d(50,40), Math.toRadians(310))
-                .splineTo(new Vector2d(55,55), Math.toRadians(225))
-                .splineTo(new Vector2d(58,40), Math.toRadians(310))
-                .splineTo(new Vector2d(55,55), Math.toRadians(225))
-                .splineTo(new Vector2d(24,12), Math.toRadians(180))
+                .strafeToSplineHeading(new Vector2d(-55,-55), Math.toRadians(45))
+                .strafeTo(new Vector2d(-49, -49))
+                .splineTo(new Vector2d(-24,-12), Math.toRadians(0))
                 .build();
 
         l3 = drive.actionBuilder(pose2)
@@ -123,12 +148,18 @@ public class aUTOtEST extends OpMode {
                 .strafeTo(new Vector2d(60, 60))
                 .build();
 
-
+        placer.setPosition(1);
+        placerSpin.setPosition(1);
+        upDownGoTO(1000, 1);
         Actions.runBlocking(
                 l1
         );
-//        Actions.runBlocking(
-//                l2
-//        );
+        placer.setPosition(0.5);
+        sleep(200);
+        placerSpin.setPosition(0);
+        upDownGoTO(1000, 1);
+        Actions.runBlocking(
+                l2
+        );
         }
     }

@@ -68,7 +68,7 @@ public class TeleopScrimmage extends OpMode {
 
         //TODO: TEST to see if chatgpt did a good job or not
         inOutSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        inOutSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        inOutSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);//or RUN_TO_POSITION
 
         telemetry.addData("Status", "Initialized");
     }
@@ -150,8 +150,8 @@ public class TeleopScrimmage extends OpMode {
         telemetry.addData("inOutSlides position", inOutSlides.getCurrentPosition());
 
         // Set the motor's target position
-        inOutSlides.setTargetPosition(targetPosition);
-        inOutSlides.setPower(1.0); // Full power to reach the target
+//        inOutSlides.setTargetPosition(targetPosition);
+//        inOutSlides.setPower(1.0); // Full power to reach the target
 
 
         if(gamepad2.dpad_down){
@@ -220,39 +220,40 @@ public class TeleopScrimmage extends OpMode {
 //        }
         if (gamepad2.cross) {
             // Run the sequence only once when button is pressed
-            if (step == 0) {
-                grabber.setPosition(0.54);
-                placer.setPosition(0.5);
-                placerSpin.setPosition(0.2);
-                timer.reset(); // Start timing for the next step
-                step++;
-            }
-
-            if (step == 1 && timer.milliseconds() >= 200) {
-                grabberSpin.setPosition(1);
-                grabberCorrection.setPosition(0.6);
-                timer.reset();
-                step++;
-            }
-
-            if (step == 2 && timer.milliseconds() >= 3000) {
-                placer.setPosition(1);
-                timer.reset();
-                step++;
-            }
-
-            if (step == 3 && timer.milliseconds() >= 400) {
-                grabber.setPosition(1);
-                timer.reset();
-                step++;
-            }
-
-            if (step == 4 && timer.milliseconds() >= 300) {
-                placerSpin.setPosition(1);
-                step = 0; // Reset step counter to allow re-triggering of sequence
-            }
+            step = 1;
         }
 
+        if (step == 1) {
+            grabber.setPosition(0.54);
+            placer.setPosition(0.5);
+            placerSpin.setPosition(0.2);
+            timer.reset(); // Start timing for the next step
+            step++;
+        }
+
+        if (step == 2 && timer.milliseconds() >= 200) {
+            grabberSpin.setPosition(1);
+            grabberCorrection.setPosition(0.6);
+            timer.reset();
+            step++;
+        }
+
+        if (step == 3 && timer.milliseconds() >= 3000) {
+            placer.setPosition(1);
+            timer.reset();
+            step++;
+        }
+
+        if (step == 4 && timer.milliseconds() >= 400) {
+            grabber.setPosition(1);
+            timer.reset();
+            step++;
+        }
+
+        if (step == 5 && timer.milliseconds() >= 300) {
+            placerSpin.setPosition(1);
+            step = 0; // Reset step counter to allow re-triggering of sequence
+        }
         //open placer
         if(gamepad2.y){
             placer.setPosition(0.5);
