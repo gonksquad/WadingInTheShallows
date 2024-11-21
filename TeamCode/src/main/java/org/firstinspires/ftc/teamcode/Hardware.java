@@ -80,19 +80,19 @@ public class Hardware {
     public void grabberSpin(int position) {
         switch (position) {
             case 1:
-                grabberSpin.setPosition(0);
+                grabberCorrection.setPosition(0);
                 break;
             case 2:
-                grabberSpin.setPosition(0.25);
+                grabberCorrection.setPosition(0.25);
                 break;
             case 3:
-                grabberSpin.setPosition(0.5);
+                grabberCorrection.setPosition(0.5);
                 break;
             case 4:
-                grabberSpin.setPosition(0.6);
+                grabberCorrection.setPosition(0.6);
                 break;
             case 5:
-                grabberSpin.setPosition(1);
+                grabberCorrection.setPosition(1);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid position: " + position);
@@ -111,16 +111,20 @@ public class Hardware {
         inOutSlides.setPower(power);
     }
 
-    public void placerFlipUp() {
-        placerSpin.setPosition(0.9);
+    public void placerFlipGrabWall() {
+        placerSpin.setPosition(0.86);
     }
 
-    public void placerFlipMid() {
+    public void placerFlipPlace() {
+        placerSpin.setPosition(0.7);
+    }
+
+    public void placerFlipIdle() {
         placerSpin.setPosition(0.6);
     }
 
-    public void placerFlipDown() {
-        placerSpin.setPosition(0.2);
+    public void placerFlipTransfer() {
+        placerSpin.setPosition(0.18);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {

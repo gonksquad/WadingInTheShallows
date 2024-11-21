@@ -17,8 +17,7 @@ public class MeepMeepTestingOLD {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(18, 64, Math.toRadians(90)))
 
-                //TODO:blue NET side, one specimen, three yellows, park ascent zone
-                //TODO:START POSE: Pose2d(18, 64, Math.toRadians(90))
+                //TODO: Ronan Auto :)
                 .setReversed(true)
                 .splineTo(new Vector2d(10,34), Math.toRadians(270))
 //                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
@@ -26,10 +25,23 @@ public class MeepMeepTestingOLD {
 //                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
 //                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
 //                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
-                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(45))
+                .strafeToSplineHeading(new Vector2d(36,36), Math.toRadians(45))
                 .strafeTo(new Vector2d(49, 49))
-                .splineTo(new Vector2d(24,12), Math.toRadians(180))
                 .build());
+
+                //TODO:blue NET side, one specimen, three yellows, park ascent zone
+                //TODO:START POSE: Pose2d(18, 64, Math.toRadians(90))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(10,34), Math.toRadians(270))
+////                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
+////                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+////                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
+////                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+////                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
+//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(45))
+//                .strafeTo(new Vector2d(49, 49))
+//                .splineTo(new Vector2d(24,12), Math.toRadians(180))
+//                .build());
 
 
                 //TODO:red NET side, one specimen, three yellows, park ascent zone

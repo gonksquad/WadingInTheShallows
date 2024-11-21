@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
@@ -9,13 +9,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.HardwareRR;
+import org.firstinspires.ftc.teamcode.PinpointDrive;
+
 
 // BATTERY AT MAX VOLTAGE
 
 
-
 @Autonomous
-public class Scrim_BlueAuto extends LinearOpMode {
+public class betaAuto extends LinearOpMode {
     public DcMotor LF;
     public DcMotor LB;
     public DcMotor RB;
@@ -76,7 +78,7 @@ public class Scrim_BlueAuto extends LinearOpMode {
 
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(3,38.2), Math.toRadians(270))
+                .splineTo(new Vector2d(3,39), Math.toRadians(270))
 //                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
 //                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
 //                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
@@ -145,7 +147,7 @@ public class Scrim_BlueAuto extends LinearOpMode {
         sleep(500);
         hardware.placerOpen();
         sleep(2000);
-        hardware.placerFlipMid();
+        hardware.placerFlipDown();
 
 
         Actions.runBlocking(
@@ -153,6 +155,7 @@ public class Scrim_BlueAuto extends LinearOpMode {
         );
 
         hardware.upDownSlides.setPower(1);
-        sleep(400);
+        hardware.placerFlipUp();
+        sleep(2700);
         }
     }

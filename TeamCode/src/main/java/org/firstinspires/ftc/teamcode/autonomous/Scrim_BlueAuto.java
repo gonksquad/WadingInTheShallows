@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
 @Autonomous
-public class alphaAuto extends LinearOpMode {
+public class Scrim_BlueAuto extends LinearOpMode {
     public DcMotor LF;
     public DcMotor LB;
     public DcMotor RB;
@@ -79,7 +79,7 @@ public class alphaAuto extends LinearOpMode {
 
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(3,39), Math.toRadians(270))
+                .splineTo(new Vector2d(3,38.2), Math.toRadians(270))
 //                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
 //                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
 //                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
@@ -148,7 +148,7 @@ public class alphaAuto extends LinearOpMode {
         sleep(500);
         hardware.placerOpen();
         sleep(2000);
-        hardware.placerFlipDown();
+        hardware.placerFlipMid();
 
 
         Actions.runBlocking(
@@ -156,7 +156,6 @@ public class alphaAuto extends LinearOpMode {
         );
 
         hardware.upDownSlides.setPower(1);
-        hardware.placerFlipUp();
-        sleep(2700);
+        sleep(400);
         }
     }

@@ -4,8 +4,9 @@ import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.Hardware;
 
 /**
@@ -45,7 +46,9 @@ public class beta extends OpMode {
     public double speed = 1;
     public Gamepad.RumbleEffect customRumbleEffect;
     public Hardware hardware;
-
+    public int grabberrot;
+    public boolean isclicked;
+    public boolean rightisclicked;
     @Override
     public void init() {
         telemetry.addData("Status", "Initializing...");
@@ -61,6 +64,10 @@ public class beta extends OpMode {
                 .addStep(1.0, 0.0, 250) // Rumble left motor 100% for 250 mSec
                 .build();
 
+        grabberrot = 1;
+        isclicked = false;
+        rightisclicked = false;
+
         telemetry.addData("Status", "Initialized.");
     }
 
@@ -71,7 +78,7 @@ public class beta extends OpMode {
         hardware.grabberFlipUp();
         hardware.grabberSpin(4);
         hardware.placerOpen();
-        hardware.placerFlipDown();
+        hardware.placerFlipIdle();
 
     }
 
@@ -81,9 +88,9 @@ public class beta extends OpMode {
         {
             speed = (-1 * gamepad1.right_trigger) + 1;
 
-            double x = gamepad1.left_stick_x * speed;
-            double y = gamepad1.left_stick_y * speed;
-            double turn = gamepad1.right_stick_x * speed;
+            double x = -gamepad1.left_stick_x * speed;
+            double y = -gamepad1.left_stick_y * speed;
+            double turn = gamepad1.right_stick_x * speed*0.8;
 
             double theta = Math.atan2(y, x);
             double power = Math.hypot(x, y);
@@ -115,7 +122,7 @@ public class beta extends OpMode {
         }
 
         if (gamepad2.left_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-350, 0.5);
+            hardware.setReachyReachyPosition(-320, 0.5);
         }
 
         telemetry.addData("inOutSlides position", hardware.inOutSlides.getCurrentPosition());
@@ -133,15 +140,15 @@ public class beta extends OpMode {
         }
 
         // Lift logic
-        if (Math.abs(gamepad2.left_stick_y) > 0.1) {
-            hardware.upDownSlides.setPower(gamepad2.left_stick_y * -1.1);
+        if (Math.abs(gamepad2.right_stick_y) > 0.2) {
+            hardware.upDownSlides.setPower(gamepad2.right_stick_y * -1.3);
         } else {
             hardware.upDownSlides.setPower(0.1);
         }
 
         // Placer control
         if (gamepad2.dpad_right) {
-            hardware.placerFlipDown();
+            hardware.placerFlipTransfer();
         }
 
         if (gamepad2.square) {
@@ -151,30 +158,32 @@ public class beta extends OpMode {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            hardware.placerFlipUp();
+            hardware.placerFlipGrabWall();
         }
 
         // Automated sequence
         if (gamepad2.cross) {
             step = 1;
+            gamepad1.rumble(1.0, 1.0, 200);
         }
 
         if (step == 1) {
             hardware.grabberClose();
             hardware.placerOpen();
-            hardware.placerFlipDown();
+            hardware.placerFlipTransfer();
             timer.reset();
             step++;
         }
 
         if (step == 2 && timer.milliseconds() >= 500) {
             hardware.grabberFlipUp();
-            hardware.grabberCorrection.setPosition(0.6);
+            grabberrot = 4;
+            hardware.setReachyReachyPosition(-350,1);
             timer.reset();
             step++;
         }
 
-        if (step == 3 && timer.milliseconds() >= 3000) {
+        if (step == 3 && timer.milliseconds() >= 1000) {
             hardware.placerClose();
             timer.reset();
             step++;
@@ -187,7 +196,7 @@ public class beta extends OpMode {
         }
 
         if (step == 5 && timer.milliseconds() >= 300) {
-            hardware.placerFlipUp();
+            hardware.placerFlipPlace();
             step = 0;
         }
 
@@ -197,13 +206,44 @@ public class beta extends OpMode {
         }
 
         // Fun effects
-        if (gamepad1.x) {
-            gamepad1.runRumbleEffect(customRumbleEffect);
-            gamepad1.setLedColor(255, 255, 255, 1000);
-        }
-        if (gamepad1.circle) {
-            gamepad1.rumble(1.0, 1.0, 200);
-        }
+//        if (gamepad1.x) {
+//            gamepad1.runRumbleEffect(customRumbleEffect);
+//            gamepad1.setLedColor(255, 255, 255, 1000);
+//        }
+//        if (gamepad1.circle) {
+//            gamepad1.rumble(1.0, 1.0, 200);
+//        }
         telemetry.addData(">", "Are we RUMBLING? %s\n", gamepad1.isRumbling() ? "YES" : "no");
+
+        //bumpers to rotate grabber
+//        if (gamepad2.left_bumper && !isclicked) {
+//            isclicked = true;
+//            if (grabberrot < 5) {
+//                grabberrot++;
+//            } else {
+//                grabberrot = 1;
+//            }
+//        } else if (!gamepad2.left_bumper) {
+//            isclicked = false;
+//        }
+//        if (gamepad2.right_bumper && !rightisclicked) {
+//            rightisclicked = true;
+//            if (grabberrot > 1) {
+//                grabberrot--;
+//            } else {
+//                grabberrot = 5;
+//            }
+//        } else if (!gamepad2.right_bumper) {
+//            rightisclicked = false;
+//        }
+        if (gamepad2.left_bumper) {
+            grabberrot = 4;
+        }
+        if (gamepad2.right_bumper) {
+            grabberrot = 5;
+        }
+        hardware.grabberSpin(grabberrot);
+        telemetry.addData("grabberrot", grabberrot);
+        telemetry.addData("isclicked", isclicked);
     }
 }
