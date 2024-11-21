@@ -155,5 +155,5 @@ public class AutoTest extends LinearOpMode {
 
         hardware.upDownSlides.setPower(1);
         sleep(400);
-/        }
+        }
     }
