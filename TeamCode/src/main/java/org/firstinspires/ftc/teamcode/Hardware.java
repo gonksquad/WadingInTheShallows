@@ -112,19 +112,19 @@ public class Hardware {
     }
 
     public void placerFlipGrabWall() {
-        placerSpin.setPosition(0.86);
-    }
-
-    public void placerFlipPlace() {
         placerSpin.setPosition(0.7);
     }
 
-    public void placerFlipIdle() {
+    public void placerFlipPlace() {
         placerSpin.setPosition(0.6);
     }
 
+    public void placerFlipIdle() {
+        placerSpin.setPosition(0.4);
+    }
+
     public void placerFlipTransfer() {
-        placerSpin.setPosition(0.18);
+        placerSpin.setPosition(0.07);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {

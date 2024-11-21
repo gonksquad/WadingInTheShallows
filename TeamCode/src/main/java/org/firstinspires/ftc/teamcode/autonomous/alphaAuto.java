@@ -135,7 +135,7 @@ public class alphaAuto extends LinearOpMode {
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
-        sleep(1750);
+        sleep(500);
 
         Actions.runBlocking(
                 l1
@@ -147,8 +147,9 @@ public class alphaAuto extends LinearOpMode {
         hardware.upDownSlides.setPower(-0.9);
         sleep(500);
         hardware.placerOpen();
-        sleep(2000);
+        sleep(1000);
         hardware.placerFlipDown();
+        sleep(1000);
 
 
         Actions.runBlocking(
@@ -157,6 +158,6 @@ public class alphaAuto extends LinearOpMode {
 
         hardware.upDownSlides.setPower(1);
         hardware.placerFlipUp();
-        sleep(2700);
+        sleep(1500);
         }
     }
