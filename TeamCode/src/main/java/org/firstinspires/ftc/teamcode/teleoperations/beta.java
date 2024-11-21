@@ -125,18 +125,6 @@ public class beta extends OpMode {
             hardware.setReachyReachyPosition(-320, 0.5);
         }
 
-        if(gamepad1.dpad_up){
-            hardware.placerFlipIdle();
-        }
-        if(gamepad1.dpad_down){
-            hardware.placerFlipPlace();
-        }
-        if(gamepad1.dpad_left){
-            hardware.placerFlipGrabWall();
-        }
-        if(gamepad1.dpad_right){
-            hardware.placerFlipTransfer();
-        }
         telemetry.addData("inOutSlides position", hardware.inOutSlides.getCurrentPosition());
         telemetry.addData("inOutSlides target", hardware.inOutSlides.getTargetPosition());
 

@@ -109,15 +109,15 @@ public class HardwareRR {
     }
 
     public void placerFlipUp() {
-        placerSpin.setPosition(0.9);
+        placerSpin.setPosition(0.7);
     }
 
     public void placerFlipMid() {
-        placerSpin.setPosition(0.6);
+        placerSpin.setPosition(0.4);
     }
 
     public void placerFlipDown() {
-        placerSpin.setPosition(0.2);
+        placerSpin.setPosition(0.07);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {
