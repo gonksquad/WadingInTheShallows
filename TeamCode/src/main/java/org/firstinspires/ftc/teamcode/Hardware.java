@@ -46,7 +46,6 @@ public class Hardware {
     public void grabberOpen() {
         grabber.setPosition(1);
     }
-
     public void grabberClose() {
         grabber.setPosition(0.56);
     }
@@ -54,7 +53,6 @@ public class Hardware {
     public void grabberFlipDown() {
         grabberSpin.setPosition(0);
     }
-
     public void grabberFlipUp() {
         grabberSpin.setPosition(1);
     }
@@ -62,7 +60,6 @@ public class Hardware {
     public void placerOpen() {
         placer.setPosition(0.5);
     }
-
     public void placerClose() {
         placer.setPosition(0.7);
     }
@@ -114,15 +111,12 @@ public class Hardware {
     public void placerFlipGrabWall() {
         placerSpin.setPosition(0.7);
     }
-
     public void placerFlipPlace() {
         placerSpin.setPosition(0.6);
     }
-
     public void placerFlipIdle() {
         placerSpin.setPosition(0.4);
     }
-
     public void placerFlipTransfer() {
         placerSpin.setPosition(0.07);
     }

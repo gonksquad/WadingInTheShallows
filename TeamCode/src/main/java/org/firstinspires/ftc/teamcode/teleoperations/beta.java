@@ -79,7 +79,6 @@ public class beta extends OpMode {
         hardware.grabberSpin(4);
         hardware.placerOpen();
         hardware.placerFlipIdle();
-
     }
 
     @Override
@@ -153,11 +152,6 @@ public class beta extends OpMode {
 
         if (gamepad2.square) {
             hardware.placerClose();
-            try {
-                sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             hardware.placerFlipGrabWall();
         }
 
