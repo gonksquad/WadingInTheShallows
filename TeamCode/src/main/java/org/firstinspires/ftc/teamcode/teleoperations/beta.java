@@ -85,7 +85,12 @@ public class beta extends OpMode {
     public void loop() {
         // Drive control
         {
-            speed = (-1 * gamepad1.right_trigger) + 1;
+//            speed = (-1 * gamepad1.right_trigger) + 1;
+            if(gamepad1.right_bumper){
+                speed = 0.3;
+            }else{
+                speed = 1;
+            }
 
             double x = -gamepad1.left_stick_x * speed;
             double y = -gamepad1.left_stick_y * speed;
@@ -117,11 +122,11 @@ public class beta extends OpMode {
 
         // Control inOutSlides with triggers
         if (gamepad2.right_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-1000, 0.5);
+            hardware.setReachyReachyPosition(-1400, 0.5);
         }
 
         if (gamepad2.left_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-320, 0.5);
+            hardware.setReachyReachyPosition(-250, 0.5);
         }
 
         telemetry.addData("inOutSlides position", hardware.inOutSlides.getCurrentPosition());
@@ -139,8 +144,12 @@ public class beta extends OpMode {
         }
 
         // Lift logic
-        if (Math.abs(gamepad2.right_stick_y) > 0.2) {
-            hardware.upDownSlides.setPower(gamepad2.right_stick_y * -1.3);
+        if (Math.abs(gamepad1.left_trigger) > 0.3) {
+            hardware.upDownSlides.setPower(gamepad1.left_trigger * -1.3);
+        } else if (Math.abs(gamepad1.right_trigger) > 0.3) {
+            hardware.upDownSlides.setPower(gamepad1.right_trigger * 1.3);
+        } else if (Math.abs(gamepad2.left_stick_y) > 0.2) {
+            hardware.upDownSlides.setPower(gamepad2.left_stick_y * -1.3);
         } else {
             hardware.upDownSlides.setPower(0.1);
         }
@@ -154,6 +163,10 @@ public class beta extends OpMode {
             hardware.placerClose();
             hardware.placerFlipGrabWall();
         }
+
+//        if (Math.abs(gamepad2.right_stick_x) > 0.2) {
+//
+//        }
 
         // Automated sequence
         if (gamepad2.cross) {
@@ -172,7 +185,7 @@ public class beta extends OpMode {
         if (step == 2 && timer.milliseconds() >= 500) {
             hardware.grabberFlipUp();
             grabberrot = 4;
-            hardware.setReachyReachyPosition(-350,1);
+            hardware.setReachyReachyPosition(-250,1);
             timer.reset();
             step++;
         }
@@ -195,7 +208,7 @@ public class beta extends OpMode {
         }
 
         // Open placer
-        if (gamepad2.y) {
+        if (gamepad2.triangle || gamepad1.cross) {
             hardware.placerOpen();
         }
 

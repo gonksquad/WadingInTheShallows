@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleoperations;
 
 import static java.lang.Thread.sleep;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+@Disabled
 @TeleOp(name = "ALPHA", group = "Ronan Presents:")
 public class alpha extends OpMode {
     // Declare OpMode members.

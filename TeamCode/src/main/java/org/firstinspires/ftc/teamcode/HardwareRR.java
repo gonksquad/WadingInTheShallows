@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 public class HardwareRR {
     public DcMotor LF;
     public DcMotor LR;
@@ -43,7 +44,6 @@ public class HardwareRR {
     public void grabberOpen() {
         grabber.setPosition(1);
     }
-
     public void grabberClose() {
         grabber.setPosition(0.56);
     }
@@ -51,7 +51,6 @@ public class HardwareRR {
     public void grabberFlipDown() {
         grabberSpin.setPosition(0);
     }
-
     public void grabberFlipUp() {
         grabberSpin.setPosition(1);
     }
@@ -59,14 +58,13 @@ public class HardwareRR {
     public void placerOpen() {
         placer.setPosition(0.5);
     }
-
     public void placerClose() {
         placer.setPosition(0.7);
     }
 
     /*
      * grabber spin positions
-     * 
+     *
      * 1: left horizontal
      * 2: left 45 (45 deg. above the left horizontal)
      * 3: vertical (90, short edge of block close to robot)
@@ -77,19 +75,19 @@ public class HardwareRR {
     public void grabberSpin(int position) {
         switch (position) {
             case 1:
-                grabberSpin.setPosition(0);
+                grabberCorrection.setPosition(0);
                 break;
             case 2:
-                grabberSpin.setPosition(0.25);
+                grabberCorrection.setPosition(0.25);
                 break;
             case 3:
-                grabberSpin.setPosition(0.5);
+                grabberCorrection.setPosition(0.5);
                 break;
             case 4:
-                grabberSpin.setPosition(0.6);
+                grabberCorrection.setPosition(0.6);
                 break;
             case 5:
-                grabberSpin.setPosition(1);
+                grabberCorrection.setPosition(1);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid position: " + position);
@@ -108,16 +106,17 @@ public class HardwareRR {
         inOutSlides.setPower(power);
     }
 
-    public void placerFlipUp() {
-        placerSpin.setPosition(0.7);
+    public void placerFlipGrabWall() {
+        placerSpin.setPosition(1);
     }
-
-    public void placerFlipMid() {
+    public void placerFlipPlace() {
+        placerSpin.setPosition(0.8);
+    }
+    public void placerFlipIdle() {
         placerSpin.setPosition(0.4);
     }
-
-    public void placerFlipDown() {
-        placerSpin.setPosition(0.07);
+    public void placerFlipTransfer() {
+        placerSpin.setPosition(0.26);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {

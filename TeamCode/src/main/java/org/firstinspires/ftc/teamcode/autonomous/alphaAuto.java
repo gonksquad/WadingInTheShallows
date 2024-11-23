@@ -79,7 +79,7 @@ public class alphaAuto extends LinearOpMode {
 
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(3,39), Math.toRadians(270))
+                .splineTo(new Vector2d(3,38.5), Math.toRadians(270))
 //                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
 //                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
 //                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
@@ -131,7 +131,7 @@ public class alphaAuto extends LinearOpMode {
 
         waitForStart();
 
-        hardware.placerFlipMid();
+        hardware.placerFlipIdle();
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
@@ -143,12 +143,13 @@ public class alphaAuto extends LinearOpMode {
 
         hardware.upDownSlides.setPower(0.1);
         sleep(1000);
-        hardware.placerFlipUp();
+        hardware.placerFlipGrabWall();
+        sleep(400);
         hardware.upDownSlides.setPower(-0.9);
         sleep(500);
         hardware.placerOpen();
         sleep(1000);
-        hardware.placerFlipDown();
+        hardware.placerFlipTransfer();
         sleep(1000);
 
 
@@ -157,7 +158,7 @@ public class alphaAuto extends LinearOpMode {
         );
 
         hardware.upDownSlides.setPower(1);
-        hardware.placerFlipUp();
+        hardware.placerFlipGrabWall();
         sleep(1500);
         }
     }

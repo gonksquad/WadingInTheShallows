@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 public class Hardware {
     public DcMotor LF;
     public DcMotor LR;
@@ -109,16 +110,16 @@ public class Hardware {
     }
 
     public void placerFlipGrabWall() {
-        placerSpin.setPosition(0.7);
+        placerSpin.setPosition(1);
     }
     public void placerFlipPlace() {
-        placerSpin.setPosition(0.6);
+        placerSpin.setPosition(0.8);
     }
     public void placerFlipIdle() {
         placerSpin.setPosition(0.4);
     }
     public void placerFlipTransfer() {
-        placerSpin.setPosition(0.07);
+        placerSpin.setPosition(0.26);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {
