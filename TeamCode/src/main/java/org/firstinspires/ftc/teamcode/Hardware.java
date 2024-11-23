@@ -81,16 +81,16 @@ public class Hardware {
                 grabberCorrection.setPosition(0);
                 break;
             case 2:
-                grabberCorrection.setPosition(0.25);
+                grabberCorrection.setPosition(0.45);
                 break;
             case 3:
-                grabberCorrection.setPosition(0.5);
-                break;
-            case 4:
                 grabberCorrection.setPosition(0.6);
                 break;
+            case 4:
+                grabberCorrection.setPosition(0.75);
+                break;
             case 5:
-                grabberCorrection.setPosition(1);
+                grabberCorrection.setPosition(0.55);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid position: " + position);

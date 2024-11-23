@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleoperations;
 
-import static java.lang.Thread.sleep;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -39,7 +37,7 @@ import org.firstinspires.ftc.teamcode.Hardware;
  * - **Y Button:** Opens the placer.
  */
 @TeleOp()
-public class beta extends OpMode {
+public class beta_safemode extends OpMode {
     // Declare OpMode members.
     private ElapsedTime timer = new ElapsedTime();
     private int step = 0;
@@ -93,9 +91,9 @@ public class beta extends OpMode {
                 speed = 1;
             }
 
-            double x = -gamepad1.left_stick_x * speed;
-            double y = -gamepad1.left_stick_y * speed;
-            double turn = gamepad1.right_stick_x * speed*0.8;
+            double x = 0;
+            double y = 0;
+            double turn = 0;
 
             double theta = Math.atan2(y, x);
             double power = Math.hypot(x, y);
@@ -185,7 +183,7 @@ public class beta extends OpMode {
 
         if (step == 2 && timer.milliseconds() >= 500) {
             hardware.grabberFlipUp();
-            grabberrot = 3;
+            grabberrot = 5;
             hardware.setReachyReachyPosition(-250,1);
             timer.reset();
             step++;

@@ -135,13 +135,13 @@ public class alphaAuto extends LinearOpMode {
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
-        sleep(500);
+        sleep(2000);
+        hardware.upDownSlides.setPower(0.1);
 
         Actions.runBlocking(
                 l1
         );
 
-        hardware.upDownSlides.setPower(0.1);
         sleep(1000);
         hardware.placerFlipGrabWall();
         sleep(400);
@@ -159,6 +159,7 @@ public class alphaAuto extends LinearOpMode {
 
         hardware.upDownSlides.setPower(1);
         hardware.placerFlipGrabWall();
+        hardware.setReachyReachyPosition(0, 0.2);
         sleep(1500);
         }
     }
