@@ -54,6 +54,7 @@ public class Hardware {
     public void grabberFlipDown() {
         grabberSpin.setPosition(0);
     }
+    public void grabberFlipMid() {grabberSpin.setPosition(0.7);}
     public void grabberFlipUp() {
         grabberSpin.setPosition(1);
     }
