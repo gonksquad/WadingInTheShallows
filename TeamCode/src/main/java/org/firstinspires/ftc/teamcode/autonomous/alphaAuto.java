@@ -68,8 +68,8 @@ public class alphaAuto extends LinearOpMode {
 
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(10, 34, Math.toRadians(270));
-        Pose2d pose2 = new Pose2d(52, 43, Math.toRadians(180));
+        Pose2d pose1 = new Pose2d(58, 40, Math.toRadians(310));
+        Pose2d pose2 = new Pose2d(24, 12, Math.toRadians(180));
 
         Pose2d pose1r = new Pose2d(12, 33, Math.toRadians(180));
         Pose2d pose2r = new Pose2d(50, 29, Math.toRadians(180));
@@ -80,11 +80,11 @@ public class alphaAuto extends LinearOpMode {
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
                 .splineTo(new Vector2d(3,38.5), Math.toRadians(270))
-//                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
+                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
+                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
+                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
                 .build();
 
         l2 = drive.actionBuilder(pose1)

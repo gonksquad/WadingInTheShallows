@@ -78,8 +78,8 @@ public class beta extends OpMode {
         hardware.grabberClose();
         hardware.grabberFlipUp();
         hardware.grabberSpin(4);
-        hardware.placerOpen();
-        hardware.placerFlipIdle();
+        hardware.placerClose();
+        hardware.placerFlipGrabWall();
     }
 
     @Override
