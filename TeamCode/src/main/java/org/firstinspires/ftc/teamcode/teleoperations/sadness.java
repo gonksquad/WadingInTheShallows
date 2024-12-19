@@ -94,32 +94,48 @@ public class sadness extends OpMode {
                 speed = 1;
             }
 
-            double x = -gamepad1.left_stick_x * speed;
-            double y = -gamepad1.left_stick_y * speed;
-            double turn = gamepad1.right_stick_x * speed * 0.8;
+            if (!gamepad1.square && !gamepad1.circle && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down && !gamepad1.dpad_right) {
+                double x = -gamepad1.left_stick_x * speed;
+                double y = -gamepad1.left_stick_y * speed;
+                double turn = gamepad1.right_stick_x * speed * 0.8;
 
-            double theta = Math.atan2(y, x);
-            double power = Math.hypot(x, y);
-            double sin = Math.sin(theta - Math.PI / 4);
-            double cos = Math.cos(theta - Math.PI / 4);
-            double max = Math.max(Math.abs(sin), Math.abs(cos));
+                double theta = Math.atan2(y, x);
+                double power = Math.hypot(x, y);
+                double sin = Math.sin(theta - Math.PI / 4);
+                double cos = Math.cos(theta - Math.PI / 4);
+                double max = Math.max(Math.abs(sin), Math.abs(cos));
 
-            double rfPower = power * cos / max - turn;
-            double lfPower = power * sin / max - turn;
-            double rbPower = power * sin / max + turn;
-            double lbPower = power * cos / max + turn;
+                double rfPower = power * cos / max - turn;
+                double lfPower = power * sin / max - turn;
+                double rbPower = power * sin / max + turn;
+                double lbPower = power * cos / max + turn;
 
-            if ((power + Math.abs(turn)) > 1) {
-                rfPower /= (power - turn);
-                lfPower /= (power - turn);
-                rbPower /= (power - turn);
-                lbPower /= (power - turn);
+                if ((power + Math.abs(turn)) > 1) {
+                    rfPower /= (power - turn);
+                    lfPower /= (power - turn);
+                    rbPower /= (power - turn);
+                    lbPower /= (power - turn);
+                }
+
+                hardware.RF.setPower(rfPower);
+                hardware.LF.setPower(lfPower);
+                hardware.RR.setPower(rbPower);
+                hardware.LR.setPower(lbPower);
             }
 
-            hardware.RF.setPower(rfPower);
-            hardware.LF.setPower(lfPower);
-            hardware.RR.setPower(rbPower);
-            hardware.LR.setPower(lbPower);
+            if(gamepad1.square){
+                hardware.spinLeft(0.2);
+            }else if (gamepad1.circle){
+                hardware.spinRight(0.2);
+            }else if(gamepad1.dpad_up){
+                hardware.forward(-0.2);
+            }else if(gamepad1.dpad_right){
+                hardware.strafeRight(-0.5);
+            }else if(gamepad1.dpad_down){
+                hardware.backward(-0.2);
+            }else if(gamepad1.dpad_left) {
+                hardware.strafeLeft(-0.5);
+            }
         }
 
         // Control inOutSlides with triggers

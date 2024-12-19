@@ -35,8 +35,8 @@ public class alphaAuto extends LinearOpMode {
 
     String position = "none";
     String startposition = "none";
-    Action l1;
-    Action l2;
+    Action goToPlace;
+    Action goToPark;
     Action l3;
 
     Action c1;
@@ -69,7 +69,7 @@ public class alphaAuto extends LinearOpMode {
 
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(10, 34, Math.toRadians(270));
+        Pose2d pose1 = new Pose2d(3, 40.2, Math.toRadians(270));
         Pose2d pose2 = new Pose2d(52, 43, Math.toRadians(180));
 
         Pose2d pose1r = new Pose2d(12, 33, Math.toRadians(180));
@@ -78,17 +78,12 @@ public class alphaAuto extends LinearOpMode {
         Pose2d pose1c = new Pose2d(16, 34, Math.toRadians(270));
         Pose2d pose2c = new Pose2d(50, 35, Math.toRadians(180));
 
-        l1 = drive.actionBuilder(drive.pose)
+        goToPlace = drive.actionBuilder(drive.pose)
                 .setReversed(true)
                 .splineTo(new Vector2d(3,40.2), Math.toRadians(270))
-//                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
                 .build();
 
-        l2 = drive.actionBuilder(pose1)
+        goToPark = drive.actionBuilder(pose1)
                 .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(45))
                 .strafeTo(new Vector2d(49, 49))
                 .splineTo(new Vector2d(24,12), Math.toRadians(180))
@@ -139,7 +134,7 @@ public class alphaAuto extends LinearOpMode {
         sleep(200);
 
         Actions.runBlocking(
-                l1
+                goToPlace
         );
 
         hardware.upDownSlides.setPower(0.1);
@@ -154,11 +149,11 @@ public class alphaAuto extends LinearOpMode {
 
 
         Actions.runBlocking(
-                l2
+                goToPark
         );
 
         hardware.upDownSlides.setPower(1);
         hardware.placerFlipUp();
-        sleep(3000);
+        sleep(1200);
     }
 }

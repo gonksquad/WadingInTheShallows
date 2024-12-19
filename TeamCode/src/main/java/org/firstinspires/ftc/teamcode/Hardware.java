@@ -48,11 +48,11 @@ public class Hardware {
         grabber.setPosition(1);
     }
     public void grabberClose() {
-        grabber.setPosition(0.56);
+        grabber.setPosition(0.55);
     }
 
     public void grabberFlipDown() {
-        grabberSpin.setPosition(0.1);
+        grabberSpin.setPosition(0.08);
     }
     public void grabberFlipMid() {grabberSpin.setPosition(0.7);}
     public void grabberFlipUp() {
@@ -60,10 +60,10 @@ public class Hardware {
     }
 
     public void placerOpen() {
-        placer.setPosition(0.65);
+        placer.setPosition(0);
     }
     public void placerClose() {
-        placer.setPosition(0.9);
+        placer.setPosition(0.5);
     }
 
     /*
@@ -85,7 +85,7 @@ public class Hardware {
                 grabberCorrection.setPosition(0.45);
                 break;
             case 3:
-                grabberCorrection.setPosition(0.53);
+                grabberCorrection.setPosition(0.56);
                 break;
             case 4:
                 grabberCorrection.setPosition(0.75);
@@ -120,7 +120,7 @@ public class Hardware {
         placerSpin.setPosition(0.4);
     }
     public void placerFlipTransfer() {
-        placerSpin.setPosition(0.20);
+        placerSpin.setPosition(0.25);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {
@@ -145,6 +145,12 @@ public class Hardware {
         LR.setPower(power);
         sleep((long) (seconds * 100));
     }
+    public void strafeLeft(double power) {
+        RF.setPower(power);
+        RR.setPower(power * -1);
+        LF.setPower(power * -1);
+        LR.setPower(power);
+    }
 
     public void strafeRight(double power, double seconds) {
         RF.setPower(power * -1);
@@ -152,6 +158,12 @@ public class Hardware {
         LF.setPower(power);
         LR.setPower(power * -1);
         sleep((long) (seconds * 100));
+    }
+    public void strafeRight(double power) {
+        RF.setPower(power * -1);
+        RR.setPower(power);
+        LF.setPower(power);
+        LR.setPower(power * -1);
     }
 
     public void backward(double power, double seconds) {
@@ -161,6 +173,12 @@ public class Hardware {
         LR.setPower(power * -1);
         sleep((long) (seconds * 100));
     }
+    public void backward(double power) {
+        RF.setPower(power * -1);
+        RR.setPower(power * -1);
+        LF.setPower(power * -1);
+        LR.setPower(power * -1);
+    }
 
     public void forward(double power, double seconds) {
         RF.setPower(power);
@@ -169,6 +187,12 @@ public class Hardware {
         LR.setPower(power);
         sleep((long) (seconds * 100));
     }
+    public void forward(double power) {
+        RF.setPower(power);
+        RR.setPower(power);
+        LF.setPower(power);
+        LR.setPower(power);
+    }
 
     public void spinLeft(double power, double seconds) {
         RF.setPower(power * -1);
@@ -176,6 +200,18 @@ public class Hardware {
         LF.setPower(power);
         LR.setPower(power);
         sleep((long) (seconds * 100));
+    }
+    public void spinLeft(double power) {
+        RF.setPower(power);
+        RR.setPower(power * -1);
+        LF.setPower(power);
+        LR.setPower(power * -1);
+    }
+    public void spinRight(double power) {
+        RF.setPower(power * -1);
+        RR.setPower(power);
+        LF.setPower(power * -1);
+        LR.setPower(power);
     }
 
     public void spinRight(double power, double seconds) {

@@ -120,6 +120,11 @@ public class beta extends OpMode {
             hardware.LF.setPower(lfPower);
             hardware.RR.setPower(rbPower);
             hardware.LR.setPower(lbPower);
+            if(gamepad2.square){
+                hardware.spinLeft();
+            } else if (gamepad2.circle){
+                hardware.spinRight();
+            }
         }
 
         // Control inOutSlides with triggers
@@ -251,6 +256,7 @@ public class beta extends OpMode {
         // if (gamepad2.right_bumper) {
         // grabberrot = 5;
         // }
+
         hardware.grabberSpin(grabberrot);
         telemetry.addData("grabberrot", grabberrot);
         telemetry.addData("isclicked", isclicked);
