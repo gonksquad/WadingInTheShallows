@@ -5,8 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
-public class Hardware {
+public class HardwareRR_old {
     public DcMotor LF;
     public DcMotor LR;
     public DcMotor RR;
@@ -20,15 +19,12 @@ public class Hardware {
     public Servo grabberCorrection;
     public Servo grabberSpin;
 
-    public Hardware(HardwareMap hardwareMap) {
+    public HardwareRR_old(HardwareMap hardwareMap) {
 
         LF = hardwareMap.get(DcMotor.class, "2");
         LR = hardwareMap.get(DcMotor.class, "0");
         RR = hardwareMap.get(DcMotor.class, "1");
         RF = hardwareMap.get(DcMotor.class, "3");
-
-        RR.setDirection(DcMotor.Direction.REVERSE);
-        LR.setDirection(DcMotor.Direction.REVERSE);
 
         upDownSlides = hardwareMap.get(DcMotor.class, "E0");
         inOutSlides = hardwareMap.get(DcMotor.class, "E1");
@@ -47,28 +43,30 @@ public class Hardware {
     public void grabberOpen() {
         grabber.setPosition(1);
     }
+
     public void grabberClose() {
         grabber.setPosition(0.56);
     }
 
     public void grabberFlipDown() {
-        grabberSpin.setPosition(0.1);
+        grabberSpin.setPosition(0);
     }
-    public void grabberFlipMid() {grabberSpin.setPosition(0.7);}
+
     public void grabberFlipUp() {
         grabberSpin.setPosition(1);
     }
 
     public void placerOpen() {
-        placer.setPosition(0.65);
+        placer.setPosition(0.7);
     }
+
     public void placerClose() {
-        placer.setPosition(0.9);
+        placer.setPosition(1);
     }
 
     /*
      * grabber spin positions
-     * 
+     *
      * 1: left horizontal
      * 2: left 45 (45 deg. above the left horizontal)
      * 3: vertical (90, short edge of block close to robot)
@@ -79,19 +77,19 @@ public class Hardware {
     public void grabberSpin(int position) {
         switch (position) {
             case 1:
-                grabberCorrection.setPosition(0);
+                grabberSpin.setPosition(0);
                 break;
             case 2:
-                grabberCorrection.setPosition(0.45);
+                grabberSpin.setPosition(0.25);
                 break;
             case 3:
-                grabberCorrection.setPosition(0.53);
+                grabberSpin.setPosition(0.5);
                 break;
             case 4:
-                grabberCorrection.setPosition(0.75);
+                grabberSpin.setPosition(0.6);
                 break;
             case 5:
-                grabberCorrection.setPosition(0.55);
+                grabberSpin.setPosition(1);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid position: " + position);
@@ -110,17 +108,16 @@ public class Hardware {
         inOutSlides.setPower(power);
     }
 
-    public void placerFlipGrabWall() {
-        placerSpin.setPosition(1);
+    public void placerFlipUp() {
+        placerSpin.setPosition(0.9);
     }
-    public void placerFlipPlace() {
-        placerSpin.setPosition(0.8);
+
+    public void placerFlipMid() {
+        placerSpin.setPosition(0.6);
     }
-    public void placerFlipIdle() {
-        placerSpin.setPosition(0.4);
-    }
-    public void placerFlipTransfer() {
-        placerSpin.setPosition(0.20);
+
+    public void placerFlipDown() {
+        placerSpin.setPosition(0.2);
     }
 
     public void setRaw(double Lr, double Lf, double Rr, double Rf) {

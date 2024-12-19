@@ -10,16 +10,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.HardwareRR;
-import org.firstinspires.ftc.teamcode.HardwareRR_old;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
 // BATTERY AT MAX VOLTAGE
 
 
-
 @Autonomous
-public class alphaAuto extends LinearOpMode {
+public class betaAuto extends LinearOpMode {
     public DcMotor LF;
     public DcMotor LB;
     public DcMotor RB;
@@ -31,7 +29,7 @@ public class alphaAuto extends LinearOpMode {
     public Servo placerSpin;
     public Servo grabberCorrection;
     public Servo grabberSpin;
-    public HardwareRR_old hardware;
+    public HardwareRR hardware;
 
     String position = "none";
     String startposition = "none";
@@ -62,15 +60,15 @@ public class alphaAuto extends LinearOpMode {
 //        RB.setDirection(DcMotor.Direction.REVERSE);
 //        LB.setDirection(DcMotor.Direction.REVERSE);
 
-        hardware = new HardwareRR_old(hardwareMap);
+        hardware = new HardwareRR(hardwareMap);
 
 //        upDownSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        upDownSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(10, 34, Math.toRadians(270));
-        Pose2d pose2 = new Pose2d(52, 43, Math.toRadians(180));
+        Pose2d pose1 = new Pose2d(58, 40, Math.toRadians(310));
+        Pose2d pose2 = new Pose2d(24, 12, Math.toRadians(180));
 
         Pose2d pose1r = new Pose2d(12, 33, Math.toRadians(180));
         Pose2d pose2r = new Pose2d(50, 29, Math.toRadians(180));
@@ -80,12 +78,12 @@ public class alphaAuto extends LinearOpMode {
 
         l1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(3,40.2), Math.toRadians(270))
-//                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
+                .splineTo(new Vector2d(3,38.5), Math.toRadians(270))
+                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
+                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
+                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
+                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
                 .build();
 
         l2 = drive.actionBuilder(pose1)
@@ -132,24 +130,26 @@ public class alphaAuto extends LinearOpMode {
 
         waitForStart();
 
-        hardware.placerFlipMid();
+        hardware.placerFlipIdle();
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
-        sleep(200);
+        sleep(2000);
+        hardware.upDownSlides.setPower(0.1);
 
         Actions.runBlocking(
                 l1
         );
 
-        hardware.upDownSlides.setPower(0.1);
         sleep(1000);
-        hardware.placerFlipUp();
+        hardware.placerFlipGrabWall();
+        sleep(400);
         hardware.upDownSlides.setPower(-0.9);
-        sleep(850);
+        sleep(500);
         hardware.placerOpen();
+        hardware.grabberFlipMid();
         sleep(1000);
-        hardware.placerFlipDown();
+        hardware.placerFlipTransfer();
         sleep(1000);
 
 
@@ -158,7 +158,9 @@ public class alphaAuto extends LinearOpMode {
         );
 
         hardware.upDownSlides.setPower(1);
-        hardware.placerFlipUp();
-        sleep(3000);
+        hardware.placerFlipGrabWall();
+        hardware.setReachyReachyPosition(0, 0.2);
+        hardware.grabberFlipMid();
+        sleep(1500);
+        }
     }
-}

@@ -39,7 +39,7 @@ import org.firstinspires.ftc.teamcode.Hardware;
  * - **Y Button:** Opens the placer.
  */
 @TeleOp()
-public class beta extends OpMode {
+public class sadness extends OpMode {
     // Declare OpMode members.
     private ElapsedTime timer = new ElapsedTime();
     private int step = 0;
@@ -125,10 +125,12 @@ public class beta extends OpMode {
         // Control inOutSlides with triggers
         if (gamepad2.right_trigger > 0.1) {
             hardware.setReachyReachyPosition(-1200, 0.5);
+            telemetry.addData("Button Pressed", "Gamepad2 Right Trigger");
         }
 
         if (gamepad2.left_trigger > 0.1) {
             hardware.setReachyReachyPosition(-250, 0.5);
+            telemetry.addData("Button Pressed", "Gamepad2 Left Trigger");
         }
 
         telemetry.addData("inOutSlides position", hardware.inOutSlides.getCurrentPosition());
@@ -138,20 +140,25 @@ public class beta extends OpMode {
         if (gamepad2.dpad_down) {
             hardware.grabberFlipDown();
             hardware.grabberOpen();
+            telemetry.addData("Button Pressed", "Gamepad2 D-pad Down");
         }
 
         if (gamepad2.dpad_up) {
             hardware.grabberFlipUp();
             hardware.grabberClose();
+            telemetry.addData("Button Pressed", "Gamepad2 D-pad Up");
         }
 
         // Lift logic
         if (Math.abs(gamepad1.left_trigger) > 0.3) {
             hardware.upDownSlides.setPower(gamepad1.left_trigger * -1.3);
+            telemetry.addData("Button Pressed", "Gamepad1 Left Trigger");
         } else if (Math.abs(gamepad1.right_trigger) > 0.3) {
             hardware.upDownSlides.setPower(gamepad1.right_trigger * 1.3);
+            telemetry.addData("Button Pressed", "Gamepad1 Right Trigger");
         } else if (Math.abs(gamepad2.left_stick_y) > 0.2) {
             hardware.upDownSlides.setPower(gamepad2.left_stick_y * -1.3);
+            telemetry.addData("Button Pressed", "Gamepad2 Left Stick Y");
         } else {
             hardware.upDownSlides.setPower(0.1);
         }
@@ -159,10 +166,12 @@ public class beta extends OpMode {
         // Placer control
         if (gamepad2.dpad_right) {
             hardware.placerFlipTransfer();
+            telemetry.addData("Button Pressed", "Gamepad2 D-pad Right");
         }
 
         if (gamepad2.square) {
             hardware.placerClose();
+            telemetry.addData("Button Pressed", "Gamepad2 Square");
         }
 
         // if (Math.abs(gamepad2.right_stick_x) > 0.2) {
@@ -173,6 +182,7 @@ public class beta extends OpMode {
         if (gamepad2.cross) {
             step = 1;
             gamepad1.rumble(1.0, 1.0, 200);
+            telemetry.addData("Button Pressed", "Gamepad2 Cross");
         }
 
         if (step == 1) {
@@ -212,6 +222,7 @@ public class beta extends OpMode {
         if (gamepad2.triangle || gamepad1.cross) {
             hardware.placerOpen();
             hardware.placerFlipGrabWall();
+            telemetry.addData("Button Pressed", "Gamepad2 Triangle or Gamepad1 Cross");
         }
 
         // Fun effects
@@ -232,6 +243,7 @@ public class beta extends OpMode {
             } else {
                 grabberrot = 1;
             }
+            telemetry.addData("Button Pressed", "Gamepad2 Left Bumper");
         } else if (!gamepad2.left_bumper) {
             isclicked = false;
         }
@@ -242,6 +254,7 @@ public class beta extends OpMode {
             } else {
                 grabberrot = 4;
             }
+            telemetry.addData("Button Pressed", "Gamepad2 Right Bumper");
         } else if (!gamepad2.right_bumper) {
             rightisclicked = false;
         }
