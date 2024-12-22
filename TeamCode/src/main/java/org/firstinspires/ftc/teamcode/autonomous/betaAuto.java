@@ -10,10 +10,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.HardwareRR;
+import org.firstinspires.ftc.teamcode.HardwareRR_old;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
 // BATTERY AT MAX VOLTAGE
+
 
 
 @Autonomous
@@ -33,9 +35,11 @@ public class betaAuto extends LinearOpMode {
 
     String position = "none";
     String startposition = "none";
-    Action l1;
-    Action l2;
-    Action l3;
+    Action goToPlace1;
+    Action goToGrabA;
+    Action goToGrabB;
+    Action goToPlace2;
+    Action goToPark;
 
     Action c1;
     Action c2;
@@ -65,10 +69,12 @@ public class betaAuto extends LinearOpMode {
 //        upDownSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 //        upDownSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(18, 64, Math.toRadians(90)));
+        PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(-18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(58, 40, Math.toRadians(310));
-        Pose2d pose2 = new Pose2d(24, 12, Math.toRadians(180));
+        Pose2d pose1 = new Pose2d(-10, 38, Math.toRadians(270));
+        Pose2d pose2 = new Pose2d(-48, 50, Math.toRadians(270));
+        Pose2d pose3 = new Pose2d(-48, 60, Math.toRadians(90));
+        Pose2d pose4 = new Pose2d(0,38,Math.toRadians(90));
 
         Pose2d pose1r = new Pose2d(12, 33, Math.toRadians(180));
         Pose2d pose2r = new Pose2d(50, 29, Math.toRadians(180));
@@ -76,27 +82,56 @@ public class betaAuto extends LinearOpMode {
         Pose2d pose1c = new Pose2d(16, 34, Math.toRadians(270));
         Pose2d pose2c = new Pose2d(50, 35, Math.toRadians(180));
 
-        l1 = drive.actionBuilder(drive.pose)
+        goToPlace1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(3,38.5), Math.toRadians(270))
-                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
-                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
-                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
+                .splineTo(new Vector2d(-10,38), Math.toRadians(270))
                 .build();
 
-        l2 = drive.actionBuilder(pose1)
-                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(45))
-                .strafeTo(new Vector2d(49, 49))
-                .splineTo(new Vector2d(24,12), Math.toRadians(180))
+        goToGrabA = drive.actionBuilder(pose1)
+                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
                 .build();
 
-        l3 = drive.actionBuilder(pose2)
-                .strafeTo(new Vector2d(45, 60))
-                .strafeTo(new Vector2d(60, 60))
+        goToGrabB = drive.actionBuilder(pose2)
+                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
                 .build();
 
+        goToPlace2 = drive.actionBuilder(pose3)
+                .strafeToSplineHeading(new Vector2d(0,38), Math.toRadians(90))
+                .build();
+
+        goToPark = drive.actionBuilder(pose4)
+                .setReversed(false)
+                .splineTo(new Vector2d(-35,30), Math.toRadians(270))
+                .splineTo(new Vector2d(-43,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-48,50), Math.toRadians(90))
+                .setReversed(false)
+                .splineTo(new Vector2d(-45,20), Math.toRadians(270))
+                .splineTo(new Vector2d(-57,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+                .setReversed(false)
+                .splineTo(new Vector2d(-55,20), Math.toRadians(270))
+                .splineTo(new Vector2d(-60,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-64,66), Math.toRadians(90))
+                .build();
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-40,10), Math.toRadians(270))
+//                .strafeTo(new Vector2d(-48,10))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-48,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+//                .strafeTo(new Vector2d(-57,10))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-55,10), Math.toRadians(270))
+//                .strafeTo(new Vector2d(-63,10))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-63,50), Math.toRadians(90))
+//                .build();
 
 
         r1 = drive.actionBuilder(drive.pose)
@@ -134,33 +169,55 @@ public class betaAuto extends LinearOpMode {
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
-        sleep(2000);
-        hardware.upDownSlides.setPower(0.1);
+        sleep(200);
 
         Actions.runBlocking(
-                l1
+                goToPlace1
         );
 
-        sleep(1000);
+        hardware.upDownSlides.setPower(0.1);
+        sleep(300);
         hardware.placerFlipGrabWall();
         sleep(400);
         hardware.upDownSlides.setPower(-0.9);
-        sleep(500);
+        sleep(200);
         hardware.placerOpen();
-        hardware.grabberFlipMid();
-        sleep(1000);
-        hardware.placerFlipTransfer();
-        sleep(1000);
-
-
+        sleep(300);
+        hardware.placerFlipIdle();
+        sleep(800);
         Actions.runBlocking(
-                l2
+                goToGrabA
         );
-
-        hardware.upDownSlides.setPower(1);
+        hardware.placerOpen();
         hardware.placerFlipGrabWall();
-        hardware.setReachyReachyPosition(0, 0.2);
-        hardware.grabberFlipMid();
-        sleep(1500);
-        }
+        sleep(800);
+        Actions.runBlocking(
+                goToGrabB
+        );
+        hardware.placerClose();
+        sleep(300);
+        hardware.placerFlipIdle();
+        sleep(800);
+        hardware.upDownSlides.setPower(1);
+        Actions.runBlocking(
+                goToPlace2
+        );
+        hardware.upDownSlides.setPower(0.1);
+        sleep(300);
+        hardware.placerFlipGrabWall();
+        sleep(400);
+        hardware.upDownSlides.setPower(-0.9);
+        sleep(200);
+        hardware.placerOpen();
+        sleep(200);
+        hardware.placerFlipIdle();
+        sleep(300);
+        Actions.runBlocking(
+                goToPark
+        );
+//
+//        hardware.upDownSlides.setPower(1);
+//        hardware.placerFlipUp();
+//        sleep(1200);
     }
+}

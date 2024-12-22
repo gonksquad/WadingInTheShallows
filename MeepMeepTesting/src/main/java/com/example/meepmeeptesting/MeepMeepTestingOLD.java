@@ -15,18 +15,40 @@ public class MeepMeepTestingOLD {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-18, 64, Math.toRadians(90)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0,38, Math.toRadians(90)))
 
-                //TODO: Ronan Auto :)
+                //TODO: Testing push into zone
+                //TODO: START POSE: Pose2d(24,12, Math.toRadians(180))
+                .setReversed(false)
+                .splineTo(new Vector2d(-35,30), Math.toRadians(270))
+                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-48,50), Math.toRadians(90))
+                .setReversed(false)
+                .splineTo(new Vector2d(-45,20), Math.toRadians(270))
+                .splineTo(new Vector2d(-55,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+                .setReversed(false)
+                .splineTo(new Vector2d(-55,20), Math.toRadians(270))
+                .splineTo(new Vector2d(-60,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+                .build());
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
 //                .setReversed(true)
-//                .splineTo(new Vector2d(10,34), Math.toRadians(270))
-//                .strafeToSplineHeading(new Vector2d(40,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(50,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(55,55), Math.toRadians(225))
-//                .strafeToSplineHeading(new Vector2d(58,40), Math.toRadians(310))
-//                .strafeToSplineHeading(new Vector2d(36,36), Math.toRadians(45))
-//                .strafeTo(new Vector2d(49, 49))
+//                .splineTo(new Vector2d(-48,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+//                .strafeTo(new Vector2d(-55,10))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-55,10), Math.toRadians(270))
+//                .strafeTo(new Vector2d(-60,10))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
 //                .build());
 
                 //TODO:blue NET side, one specimen, three yellows, park ascent zone
@@ -61,42 +83,42 @@ public class MeepMeepTestingOLD {
 
                 //TODO:blue SPECIMEN side, four specimens, park ????
                 //TODO:START POSE: Pose2d(-18, 64, Math.toRadians(90))
-                .setReversed(true)
-                .splineTo(new Vector2d(-10,34), Math.toRadians(270))
-                //score first specimen
-                .strafeToSplineHeading(new Vector2d(-40,40), Math.toRadians(240))
-                //grab first sample
-                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
-                //place first sample in observation zone
-                .strafeToSplineHeading(new Vector2d(-50,40), Math.toRadians(240))
-                //grab second sample
-                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
-                //place second sample in observation zone
-                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
-                //grab first specimen
-                .strafeToSplineHeading(new Vector2d(-12,34), Math.toRadians(90))
-                //score first specimen
-                .strafeToSplineHeading(new Vector2d(-58,40), Math.toRadians(230))
-                //grab third sample
-                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
-                //place third sample in observation zone
-                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
-                //grab second specimen
-                .strafeToSplineHeading(new Vector2d(-8,34), Math.toRadians(90))
-                //score second specimen
-                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
-                //grab third specimen
-                .strafeToSplineHeading(new Vector2d(-4,34), Math.toRadians(90))
-                //score third specimen
-                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
-                //grab fourth specimen
-                .strafeToSplineHeading(new Vector2d(0,34), Math.toRadians(90))
-                //score fourth specimen
-                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
-                //grab fifth specimen
-                .strafeToSplineHeading(new Vector2d(4,34), Math.toRadians(90))
-                //score fifth specimen
-                .build());
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-10,34), Math.toRadians(270))
+//                //score first specimen
+//                .strafeToSplineHeading(new Vector2d(-40,40), Math.toRadians(240))
+//                //grab first sample
+//                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
+//                //place first sample in observation zone
+//                .strafeToSplineHeading(new Vector2d(-50,40), Math.toRadians(240))
+//                //grab second sample
+//                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
+//                //place second sample in observation zone
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab first specimen
+//                .strafeToSplineHeading(new Vector2d(-12,34), Math.toRadians(90))
+//                //score first specimen
+//                .strafeToSplineHeading(new Vector2d(-58,40), Math.toRadians(230))
+//                //grab third sample
+//                .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
+//                //place third sample in observation zone
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab second specimen
+//                .strafeToSplineHeading(new Vector2d(-8,34), Math.toRadians(90))
+//                //score second specimen
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab third specimen
+//                .strafeToSplineHeading(new Vector2d(-4,34), Math.toRadians(90))
+//                //score third specimen
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab fourth specimen
+//                .strafeToSplineHeading(new Vector2d(0,34), Math.toRadians(90))
+//                //score fourth specimen
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab fifth specimen
+//                .strafeToSplineHeading(new Vector2d(4,34), Math.toRadians(90))
+//                //score fifth specimen
+//                .build());
 
 
                 //TODO:red SPECIMEN side, four specimens, park ????

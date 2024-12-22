@@ -57,10 +57,10 @@ public class HardwareRR {
     }
 
     public void placerOpen() {
-        placer.setPosition(0.5);
+        placer.setPosition(0);
     }
     public void placerClose() {
-        placer.setPosition(0.7);
+        placer.setPosition(0.5);
     }
 
     /*
