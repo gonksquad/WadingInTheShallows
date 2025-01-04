@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleoperations;
 
 import static java.lang.Thread.sleep;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -39,6 +40,7 @@ import org.firstinspires.ftc.teamcode.Hardware;
  * - **Y Button:** Opens the placer.
  */
 @TeleOp()
+@Disabled
 public class beta extends OpMode {
     // Declare OpMode members.
     private ElapsedTime timer = new ElapsedTime();
@@ -129,11 +131,11 @@ public class beta extends OpMode {
 
         // Control inOutSlides with triggers
         if (gamepad2.right_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-1200, 0.5);
+            hardware.setReachyReachyPosition(1200, 1);
         }
 
         if (gamepad2.left_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-250, 0.5);
+            hardware.setReachyReachyPosition(250, 1);
         }
 
         telemetry.addData("inOutSlides position", hardware.inOutSlides.getCurrentPosition());

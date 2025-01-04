@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.HardwareRR;
-import org.firstinspires.ftc.teamcode.HardwareRR_old;
 import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
@@ -19,7 +18,7 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
 @Autonomous
-public class betaAuto extends LinearOpMode {
+public class sharpcheddar extends LinearOpMode {
     public DcMotor LF;
     public DcMotor LB;
     public DcMotor RB;
@@ -84,7 +83,7 @@ public class betaAuto extends LinearOpMode {
 
         goToPlace1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-10,40), Math.toRadians(270))
+                .splineTo(new Vector2d(-10,38.5), Math.toRadians(270))
                 .build();
 
         goToGrabA = drive.actionBuilder(pose1)
@@ -168,7 +167,6 @@ public class betaAuto extends LinearOpMode {
         hardware.placerClose();
         sleep(1000);
         hardware.upDownSlides.setPower(1);
-        sleep(200);
 
         Actions.runBlocking(
                 goToPlace1

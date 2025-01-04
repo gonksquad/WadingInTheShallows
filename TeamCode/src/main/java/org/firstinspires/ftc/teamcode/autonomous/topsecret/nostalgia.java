@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous.topsecret;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * After time expires (RECORDING_DURATION), it stops and closes the CSV file.
  */
 @Autonomous(name="nostalgia", group="Linear Opmode")
+@Disabled
 public class nostalgia extends LinearOpMode {
 
     private static final int RECORDING_DURATION = 35;   // Record/drive for 35 seconds

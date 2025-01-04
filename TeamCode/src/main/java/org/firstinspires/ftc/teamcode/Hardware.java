@@ -111,7 +111,7 @@ public class Hardware {
     }
 
     public void placerFlipGrabWall() {
-        placerSpin.setPosition(0.9);
+        placerSpin.setPosition(0.95);
     }
     public void placerFlipPlace() {
         placerSpin.setPosition(0.8);

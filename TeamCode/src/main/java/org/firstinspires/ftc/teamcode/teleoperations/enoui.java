@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleoperations;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
  * After the last line, it zeroes all power for 5s and ends.
  */
 @Autonomous(name="enoui", group="Linear Opmode")
+@Disabled
 public class enoui extends LinearOpMode {
 
     // A class to store one line of CSV data for "gamepad1"

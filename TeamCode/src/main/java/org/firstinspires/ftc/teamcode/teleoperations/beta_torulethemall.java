@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleoperations;
 
 import static java.lang.Thread.sleep;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -39,6 +40,7 @@ import org.firstinspires.ftc.teamcode.Hardware;
  * - **Y Button:** Opens the placer.
  */
 @TeleOp()
+@Disabled
 public class beta_torulethemall extends OpMode {
     // Declare OpMode members.
     private ElapsedTime timer = new ElapsedTime();
