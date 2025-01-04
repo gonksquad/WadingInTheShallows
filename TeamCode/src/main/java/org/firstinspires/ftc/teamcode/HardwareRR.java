@@ -108,7 +108,7 @@ public class HardwareRR {
     }
 
     public void placerFlipGrabWall() {
-        placerSpin.setPosition(1);
+        placerSpin.setPosition(0.9);
     }
     public void placerFlipPlace() {
         placerSpin.setPosition(0.8);

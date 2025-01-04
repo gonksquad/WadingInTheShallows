@@ -15,26 +15,64 @@ public class MeepMeepTestingOLD {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0,38, Math.toRadians(90)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0,38,Math.toRadians(90)))
 
-                //TODO: Testing push into zone
-                //TODO: START POSE: Pose2d(24,12, Math.toRadians(180))
                 .setReversed(false)
                 .splineTo(new Vector2d(-35,30), Math.toRadians(270))
+//                .splineTo(new Vector2d(-35,0), Math.toRadians(170))
                 .splineTo(new Vector2d(-45,10), Math.toRadians(270))
                 .setReversed(true)
                 .splineTo(new Vector2d(-48,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-45,20), Math.toRadians(270))
-                .splineTo(new Vector2d(-55,10), Math.toRadians(270))
+                .splineTo(new Vector2d(-57,10), Math.toRadians(270))
                 .setReversed(true)
                 .splineTo(new Vector2d(-60,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-55,20), Math.toRadians(270))
-                .splineTo(new Vector2d(-60,10), Math.toRadians(270))
-                .setReversed(true)
-                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+                .splineTo(new Vector2d(-60,10), Math.toRadians(180))
+                .strafeTo(new Vector2d(-65,66))
                 .build());
+                //TODO: More test trajectories
+                //TODO:START POSE: Pose2d(-18, 64, Math.toRadians(270))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-10,34), Math.toRadians(270))
+//                //score first specimen
+//                .strafeToSplineHeading(new Vector2d(-30,45), Math.toRadians(220))
+//                //grab first sample
+//                .turnTo(Math.toRadians(120))
+//                //place first sample in observation zone
+//                .turnTo(Math.toRadians(212))
+//                //grab second sample
+//                .turnTo(Math.toRadians(120))
+//                //place second sample in observation zone
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab second specimen
+//                .strafeToSplineHeading(new Vector2d(-8,34), Math.toRadians(90))
+//                //score second specimen
+//                .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
+//                //grab third specimen
+//                .strafeToSplineHeading(new Vector2d(-4,34), Math.toRadians(90))
+//                //score third specimen
+//                .build());
+                //TODO: Testing push into zone
+                //TODO: START POSE: Pose2d(24,12, Math.toRadians(180))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-35,30), Math.toRadians(270))
+//                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-48,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-45,20), Math.toRadians(270))
+//                .splineTo(new Vector2d(-55,10), Math.toRadians(270))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+//                .setReversed(false)
+//                .splineTo(new Vector2d(-55,20), Math.toRadians(270))
+//                .splineTo(new Vector2d(-60,10), Math.toRadians(270))
+//                .setReversed(true)
+//                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
+//                .build());
 //                .setReversed(false)
 //                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
 //                .setReversed(true)
@@ -50,6 +88,8 @@ public class MeepMeepTestingOLD {
 //                .setReversed(true)
 //                .splineTo(new Vector2d(-60,50), Math.toRadians(90))
 //                .build());
+
+
 
                 //TODO:blue NET side, one specimen, three yellows, park ascent zone
                 //TODO:START POSE: Pose2d(18, 64, Math.toRadians(90))

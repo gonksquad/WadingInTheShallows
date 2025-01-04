@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.PinpointDrive;
 
 
 @Autonomous
-public class betaAuto extends LinearOpMode {
+public class GoudaAuto extends LinearOpMode {
     public DcMotor LF;
     public DcMotor LB;
     public DcMotor RB;
@@ -41,9 +41,9 @@ public class betaAuto extends LinearOpMode {
     Action goToPlace2;
     Action goToPark;
 
-    Action c1;
-    Action c2;
-    Action c3;
+    Action toSamplePickup;
+    Action turnPlace;
+    Action turnGrab;
 
     Action r1;
     Action r2;
@@ -71,38 +71,48 @@ public class betaAuto extends LinearOpMode {
 
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(-18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(-10, 39.5, Math.toRadians(270));
-        Pose2d pose2 = new Pose2d(-48, 50, Math.toRadians(270));
-        Pose2d pose3 = new Pose2d(-48, 60, Math.toRadians(90));
-        Pose2d pose4 = new Pose2d(0,38,Math.toRadians(90));
-
-        Pose2d pose1r = new Pose2d(12, 33, Math.toRadians(180));
-        Pose2d pose2r = new Pose2d(50, 29, Math.toRadians(180));
-
-        Pose2d pose1c = new Pose2d(16, 34, Math.toRadians(270));
-        Pose2d pose2c = new Pose2d(50, 35, Math.toRadians(180));
+        Pose2d pose1 = new Pose2d(-10, 38, Math.toRadians(270));
+        Pose2d pose2 = new Pose2d(-30,45, Math.toRadians(220));
+        Pose2d pose3 = new Pose2d(-30,45, Math.toRadians(120));
+        Pose2d pose4 = new Pose2d(-40,45, Math.toRadians(220));
+        Pose2d pose5 = new Pose2d(12, 33, Math.toRadians(180));
+        Pose2d pose6 = new Pose2d(-48,60, Math.toRadians(270));
+        Pose2d pose7 = new Pose2d(0,38, Math.toRadians(90));
 
         goToPlace1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-10,40), Math.toRadians(270))
+                .splineTo(new Vector2d(-10,38), Math.toRadians(270))
                 .build();
 
-        goToGrabA = drive.actionBuilder(pose1)
+        toSamplePickup = drive.actionBuilder(pose1)
+                .strafeToSplineHeading(new Vector2d(-30,45), Math.toRadians(220))
+                .build();
+
+        turnPlace = drive.actionBuilder(pose2)
+                .turnTo(Math.toRadians(120))
+                .build();
+
+        turnGrab = drive.actionBuilder(pose3)
+                .strafeToSplineHeading(new Vector2d(-40,45), Math.toRadians(220))
+                .build();
+
+        goToGrabA = drive.actionBuilder(pose4)
                 .strafeToSplineHeading(new Vector2d(-48,50), Math.toRadians(270))
                 .build();
 
-        goToGrabB = drive.actionBuilder(pose2)
+        goToGrabB = drive.actionBuilder(pose5)
                 .strafeToSplineHeading(new Vector2d(-48,60), Math.toRadians(270))
                 .build();
 
-        goToPlace2 = drive.actionBuilder(pose3)
+        goToPlace2 = drive.actionBuilder(pose6)
                 .strafeToSplineHeading(new Vector2d(0,38), Math.toRadians(90))
                 .build();
 
-        goToPark = drive.actionBuilder(pose4)
+        goToPark = drive.actionBuilder(pose7)
                 .setReversed(false)
-                .splineTo(new Vector2d(-30,30), Math.toRadians(270))
-                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+                .splineTo(new Vector2d(-35,30), Math.toRadians(270))
+                .splineTo(new Vector2d(-35,0), Math.toRadians(170))
+                .splineTo(new Vector2d(-43,15), Math.toRadians(270))
                 .setReversed(true)
                 .splineTo(new Vector2d(-48,50), Math.toRadians(90))
                 .setReversed(false)
@@ -112,8 +122,9 @@ public class betaAuto extends LinearOpMode {
                 .splineTo(new Vector2d(-60,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-55,20), Math.toRadians(270))
-                .splineTo(new Vector2d(-63,10), Math.toRadians(180))
-                .strafeTo(new Vector2d(-63,66))
+                .splineTo(new Vector2d(-60,10), Math.toRadians(270))
+                .setReversed(true)
+                .splineTo(new Vector2d(-65,66), Math.toRadians(90))
                 .build();
 //                .setReversed(false)
 //                .splineTo(new Vector2d(-40,10), Math.toRadians(270))
@@ -132,35 +143,6 @@ public class betaAuto extends LinearOpMode {
 //                .splineTo(new Vector2d(-63,50), Math.toRadians(90))
 //                .build();
 
-
-        r1 = drive.actionBuilder(drive.pose)
-                .splineTo(new Vector2d(12, 33), Math.toRadians(180))
-                .build();
-
-        r2 = drive.actionBuilder(pose1r)
-                .strafeTo(new Vector2d(50, 29))
-                .build();
-
-        r3 = drive.actionBuilder(pose2r)
-                .strafeTo(new Vector2d(45, 60))
-                .strafeTo(new Vector2d(60, 60))
-                .build();
-
-
-
-        c1 = drive.actionBuilder(drive.pose)
-                .splineTo(new Vector2d(16, 34), Math.toRadians(270))
-                .build();
-
-        c2 = drive.actionBuilder(pose1c)
-                .strafeTo(new Vector2d(50, 35))
-                .turn(Math.toRadians(-90))
-                .build();
-
-        c3 = drive.actionBuilder(pose2c)
-                .strafeTo(new Vector2d(45, 60))
-                .strafeTo(new Vector2d(60, 60))
-                .build();
 
         waitForStart();
 
@@ -184,6 +166,35 @@ public class betaAuto extends LinearOpMode {
         sleep(200);
         hardware.placerFlipIdle();
         sleep(500);
+
+        hardware.grabberFlipMid();
+        hardware.grabberOpen();
+        Actions.runBlocking(
+                toSamplePickup
+        );
+        hardware.setReachyReachyPosition(-1000, 1);
+        sleep(5000);
+        hardware.grabberFlipDown();
+        sleep(3000);
+        hardware.grabberClose();
+        Actions.runBlocking(
+                turnPlace
+        );
+        hardware.grabberOpen();
+        hardware.grabberFlipMid();
+        Actions.runBlocking(
+                turnGrab
+        );
+        hardware.grabberFlipDown();
+        sleep(5000);
+        hardware.grabberClose();
+        Actions.runBlocking(
+                turnPlace
+        );
+        hardware.grabberOpen();
+        hardware.grabberFlipMid();
+        hardware.setReachyReachyPosition(0, 1);
+
         Actions.runBlocking(
                 goToGrabA
         );
