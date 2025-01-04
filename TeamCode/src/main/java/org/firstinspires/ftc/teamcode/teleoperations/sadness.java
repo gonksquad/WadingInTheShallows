@@ -1,44 +1,43 @@
 package org.firstinspires.ftc.teamcode.teleoperations;
 
-import static java.lang.Thread.sleep;
-
+import android.media.MediaPlayer; // Import MediaPlayer
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.Hardware;
+import org.firstinspires.ftc.teamcode.R;
+
+import java.io.IOException;
 
 /**
  * **Gamepad 1 Controls:**
  * - **Left Stick (X and Y):** Controls robot movement (translation).
  * - **Right Stick X:** Controls robot turning.
  * - **Right Trigger:**
- * - Reduces robot speed when pressed.
- * - Moves the inOutSlides to position -1000 when pressed beyond a threshold (>
- * 0.1).
+ *   - Reduces robot speed when pressed.
+ *   - Moves the inOutSlides to position -1000 when pressed beyond a threshold (> 0.1).
  * - **Left Trigger:**
- * - Moves the inOutSlides to position -100 when pressed beyond a threshold (>
- * 0.1).
+ *   - Moves the inOutSlides to position -100 when pressed beyond a threshold (> 0.1).
  * - **X Button:**
- * - Activates a custom rumble effect.
- * - Sets the gamepad LED color to white for 1 second.
+ *   - Activates a custom rumble effect.
+ *   - Sets the gamepad LED color to white for 1 second.
  * - **Circle Button:** Rumbles both motors at full power for 200 milliseconds.
+ * - **Triangle Button:** Plays the `choppa.mp3` sound.
  *
  * **Gamepad 2 Controls:**
  * - **D-pad Up:** Flips the grabber up and closes it.
  * - **D-pad Down:** Flips the grabber down and opens it.
- * - **Left Stick Y:** Controls the up/down slides (lift), with upward movement
- * mapped to negative power.
+ * - **Left Stick Y:** Controls the up/down slides (lift), with upward movement mapped to negative power.
  * - **D-pad Right:** Flips the placer down.
  * - **Square Button:**
- * - Closes the placer.
- * - Waits for 200 milliseconds.
- * - Flips the placer up.
+ *   - Closes the placer.
+ *   - Waits for 200 milliseconds.
+ *   - Flips the placer up.
  * - **Cross Button:** Starts an automated sequence for object placement.
  * - **Y Button:** Opens the placer.
  */
-@TeleOp()
+@TeleOp(name = "sadness", group = "TeleOp")
 public class sadness extends OpMode {
     // Declare OpMode members.
     private ElapsedTime timer = new ElapsedTime();
@@ -49,6 +48,10 @@ public class sadness extends OpMode {
     public int grabberrot;
     public boolean isclicked;
     public boolean rightisclicked;
+
+    // Declare MediaPlayer and state variable for edge detection
+    private MediaPlayer mediaPlayer;
+    private boolean isTrianglePressedPreviously = false; // To detect edge
 
     @Override
     public void init() {
@@ -70,6 +73,14 @@ public class sadness extends OpMode {
         isclicked = false;
         rightisclicked = false;
 
+        // Initialize MediaPlayer with the choppa.mp3 sound file
+        mediaPlayer = MediaPlayer.create(hardwareMap.appContext, R.raw.choppa);
+        if (mediaPlayer == null) {
+            telemetry.addData("MediaPlayer", "Failed to initialize. Check the sound file.");
+        } else {
+            telemetry.addData("MediaPlayer", "Initialized successfully.");
+        }
+
         telemetry.addData("Status", "Initialized.");
     }
 
@@ -87,14 +98,15 @@ public class sadness extends OpMode {
     public void loop() {
         // Drive control
         {
-            // speed = (-1 * gamepad1.right_trigger) + 1;
             if (gamepad1.right_bumper) {
                 speed = 0.3;
             } else {
                 speed = 1;
             }
 
-            if (!gamepad1.square && !gamepad1.circle && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down && !gamepad1.dpad_right) {
+            // Check if no directional buttons are pressed to allow joystick control
+            if (!gamepad1.square && !gamepad1.circle && !gamepad1.dpad_left &&
+                    !gamepad1.dpad_up && !gamepad1.dpad_down && !gamepad1.dpad_right) {
                 double x = -gamepad1.left_stick_x * speed;
                 double y = -gamepad1.left_stick_y * speed;
                 double turn = gamepad1.right_stick_x * speed * 0.8;
@@ -123,17 +135,18 @@ public class sadness extends OpMode {
                 hardware.LR.setPower(lbPower);
             }
 
-            if(gamepad1.square){
+            // Additional drive controls based on button presses
+            if (gamepad1.square) {
                 hardware.spinLeft(0.2);
-            }else if (gamepad1.circle){
+            } else if (gamepad1.circle) {
                 hardware.spinRight(0.2);
-            }else if(gamepad1.dpad_up){
+            } else if (gamepad1.dpad_up) {
                 hardware.forward(-0.2);
-            }else if(gamepad1.dpad_right){
+            } else if (gamepad1.dpad_right) {
                 hardware.strafeRight(-0.5);
-            }else if(gamepad1.dpad_down){
+            } else if (gamepad1.dpad_down) {
                 hardware.backward(-0.2);
-            }else if(gamepad1.dpad_left) {
+            } else if (gamepad1.dpad_left) {
                 hardware.strafeLeft(-0.5);
             }
         }
@@ -190,10 +203,6 @@ public class sadness extends OpMode {
             telemetry.addData("Button Pressed", "Gamepad2 Square");
         }
 
-        // if (Math.abs(gamepad2.right_stick_x) > 0.2) {
-        //
-        // }
-
         // Automated sequence
         if (gamepad2.cross) {
             step = 1;
@@ -235,23 +244,42 @@ public class sadness extends OpMode {
         }
 
         // Open placer
-        if (gamepad2.triangle || gamepad1.cross) {
+        // Note: 'gamepad2.triangle' is not a standard Gamepad button. Replace with the correct button.
+        // Assuming 'y' corresponds to Triangle on gamepad2
+        if (gamepad2.y || gamepad1.cross) {
             hardware.placerOpen();
             hardware.placerFlipGrabWall();
-            telemetry.addData("Button Pressed", "Gamepad2 Triangle or Gamepad1 Cross");
+            telemetry.addData("Button Pressed", "Gamepad2 Y (Triangle) or Gamepad1 Cross");
         }
 
-        // Fun effects
+        // Play sound when gamepad1 Triangle button is pressed
+        // Assuming 'y' corresponds to Triangle button
+        boolean isTrianglePressed = gamepad1.y; // Typically, 'y' corresponds to Triangle
+        if (isTrianglePressed && !isTrianglePressedPreviously) {
+            if (mediaPlayer != null) {
+                // Reset the MediaPlayer to the beginning if already playing
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.seekTo(0);
+                }
+                mediaPlayer.start();
+                telemetry.addData("Sound", "choppa.mp3 played.");
+            } else {
+                telemetry.addData("MediaPlayer", "Not initialized.");
+            }
+        }
+        isTrianglePressedPreviously = isTrianglePressed; // Update the previous state
+
+        // Fun effects (commented out)
         // if (gamepad1.x) {
-        // gamepad1.runRumbleEffect(customRumbleEffect);
-        // gamepad1.setLedColor(255, 255, 255, 1000);
+        //     gamepad1.runRumbleEffect(customRumbleEffect);
+        //     gamepad1.setLedColor(255, 255, 255, 1000);
         // }
         // if (gamepad1.circle) {
-        // gamepad1.rumble(1.0, 1.0, 200);
+        //     gamepad1.rumble(1.0, 1.0, 200);
         // }
         telemetry.addData(">", "Are we RUMBLING? %s\n", gamepad1.isRumbling() ? "YES" : "no");
 
-        // bumpers to rotate grabber
+        // Bumpers to rotate grabber
         if (gamepad2.left_bumper && !isclicked) {
             isclicked = true;
             if (grabberrot < 4) {
@@ -263,6 +291,7 @@ public class sadness extends OpMode {
         } else if (!gamepad2.left_bumper) {
             isclicked = false;
         }
+
         if (gamepad2.right_bumper && !rightisclicked) {
             rightisclicked = true;
             if (grabberrot > 1) {
@@ -274,14 +303,28 @@ public class sadness extends OpMode {
         } else if (!gamepad2.right_bumper) {
             rightisclicked = false;
         }
+
         // if (gamepad2.left_bumper) {
-        // grabberrot = 4;
+        //     grabberrot = 4;
         // }
         // if (gamepad2.right_bumper) {
-        // grabberrot = 5;
+        //     grabberrot = 5;
         // }
         hardware.grabberSpin(grabberrot);
         telemetry.addData("grabberrot", grabberrot);
         telemetry.addData("isclicked", isclicked);
+    }
+
+    @Override
+    public void stop() {
+        // Release MediaPlayer resources
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer.release();
+            mediaPlayer = null;
+            telemetry.addData("MediaPlayer", "Released.");
+        }
     }
 }

@@ -81,11 +81,11 @@ public class GoudaAuto extends LinearOpMode {
 
         goToPlace1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-10,38), Math.toRadians(270))
+                .splineTo(new Vector2d(-10,40), Math.toRadians(270))
                 .build();
 
         toSamplePickup = drive.actionBuilder(pose1)
-                .strafeToSplineHeading(new Vector2d(-30,45), Math.toRadians(220))
+                .strafeToSplineHeading(new Vector2d(-32,44), Math.toRadians(220))
                 .build();
 
         turnPlace = drive.actionBuilder(pose2)
@@ -93,7 +93,7 @@ public class GoudaAuto extends LinearOpMode {
                 .build();
 
         turnGrab = drive.actionBuilder(pose3)
-                .strafeToSplineHeading(new Vector2d(-40,45), Math.toRadians(220))
+                .strafeToSplineHeading(new Vector2d(-41,44), Math.toRadians(220))
                 .build();
 
         goToGrabA = drive.actionBuilder(pose4)
@@ -173,6 +173,7 @@ public class GoudaAuto extends LinearOpMode {
                 toSamplePickup
         );
         hardware.setReachyReachyPosition(-1000, 1);
+        hardware.grabberSpin(4);
         sleep(5000);
         hardware.grabberFlipDown();
         sleep(3000);
@@ -186,6 +187,7 @@ public class GoudaAuto extends LinearOpMode {
                 turnGrab
         );
         hardware.grabberFlipDown();
+        hardware.grabberSpin(4);
         sleep(5000);
         hardware.grabberClose();
         Actions.runBlocking(
