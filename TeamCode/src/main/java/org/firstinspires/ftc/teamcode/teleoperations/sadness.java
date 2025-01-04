@@ -153,12 +153,12 @@ public class sadness extends OpMode {
 
         // Control inOutSlides with triggers
         if (gamepad2.right_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-1200, 0.5);
+            hardware.setReachyReachyPosition(1200, 1);
             telemetry.addData("Button Pressed", "Gamepad2 Right Trigger");
         }
 
         if (gamepad2.left_trigger > 0.1) {
-            hardware.setReachyReachyPosition(-250, 0.5);
+            hardware.setReachyReachyPosition(250, 1);
             telemetry.addData("Button Pressed", "Gamepad2 Left Trigger");
         }
 
@@ -221,7 +221,7 @@ public class sadness extends OpMode {
         if (step == 2 && timer.milliseconds() >= 500) {
             hardware.grabberFlipUp();
             grabberrot = 3;
-            hardware.setReachyReachyPosition(-250, 1);
+            hardware.setReachyReachyPosition(250, 1);
             timer.reset();
             step++;
         }
