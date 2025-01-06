@@ -70,7 +70,7 @@ public class sharpcheddar extends LinearOpMode {
 
         PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(-18, 64, Math.toRadians(90)));
 
-        Pose2d pose1 = new Pose2d(-10, 39.5, Math.toRadians(270));
+        Pose2d pose1 = new Pose2d(-10, 38.5, Math.toRadians(270));
         Pose2d pose2 = new Pose2d(-48, 50, Math.toRadians(270));
         Pose2d pose3 = new Pose2d(-48, 60, Math.toRadians(90));
         Pose2d pose4 = new Pose2d(0,38,Math.toRadians(90));
@@ -83,7 +83,7 @@ public class sharpcheddar extends LinearOpMode {
 
         goToPlace1 = drive.actionBuilder(drive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-10,38.5), Math.toRadians(270))
+                .splineTo(new Vector2d(-10,39), Math.toRadians(270))
                 .build();
 
         goToGrabA = drive.actionBuilder(pose1)
@@ -95,14 +95,14 @@ public class sharpcheddar extends LinearOpMode {
                 .build();
 
         goToPlace2 = drive.actionBuilder(pose3)
-                .strafeToSplineHeading(new Vector2d(0,38), Math.toRadians(90))
+                .strafeToSplineHeading(new Vector2d(0,39), Math.toRadians(90))
                 .build();
 
         goToPark = drive.actionBuilder(pose4)
                 .setReversed(false)
-                .splineTo(new Vector2d(-30,30), Math.toRadians(270))
-                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+                .splineTo(new Vector2d(-40,10), Math.toRadians(270))
                 .setReversed(true)
+                .splineTo(new Vector2d(-48,20), Math.toRadians(90))
                 .splineTo(new Vector2d(-48,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-45,20), Math.toRadians(270))

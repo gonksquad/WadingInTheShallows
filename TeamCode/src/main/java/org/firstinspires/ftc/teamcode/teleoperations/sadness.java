@@ -1,3 +1,4 @@
+//I cannot believe I am still standing after suffering for so long. It has been so long since I have actually done anything outside of school and extracurricular... I have barely been able to explore my gender identity let alone live a "normal" teenage standard life. I have been fucked over by so many hurtful things... I have burried so much... I can't even feel happy anymore.
 package org.firstinspires.ftc.teamcode.teleoperations;
 
 import android.media.MediaPlayer; // Import MediaPlayer

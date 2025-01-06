@@ -18,10 +18,10 @@ public class MeepMeepTestingOLD {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0,38,Math.toRadians(90)))
 
                 .setReversed(false)
-                .splineTo(new Vector2d(-35,30), Math.toRadians(270))
-//                .splineTo(new Vector2d(-35,0), Math.toRadians(170))
-                .splineTo(new Vector2d(-45,10), Math.toRadians(270))
+                //.splineTo(new Vector2d(-30,30), Math.toRadians(270))
+                .splineTo(new Vector2d(-40,10), Math.toRadians(270))
                 .setReversed(true)
+                .splineTo(new Vector2d(-48,20), Math.toRadians(90))
                 .splineTo(new Vector2d(-48,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-45,20), Math.toRadians(270))
@@ -30,8 +30,8 @@ public class MeepMeepTestingOLD {
                 .splineTo(new Vector2d(-60,50), Math.toRadians(90))
                 .setReversed(false)
                 .splineTo(new Vector2d(-55,20), Math.toRadians(270))
-                .splineTo(new Vector2d(-60,10), Math.toRadians(180))
-                .strafeTo(new Vector2d(-65,66))
+                .splineTo(new Vector2d(-63,10), Math.toRadians(180))
+                .strafeTo(new Vector2d(-63,66))
                 .build());
                 //TODO: More test trajectories
                 //TODO:START POSE: Pose2d(-18, 64, Math.toRadians(270))
